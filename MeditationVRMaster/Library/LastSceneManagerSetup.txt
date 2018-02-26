@@ -1,8 +1,0 @@
-sceneSetups:
-<<<<<<< HEAD
-- path: Assets/VRSampleScenes/Scenes/MainMenu.unity
-=======
-- path: Assets/TestScene1.unity
->>>>>>> bdd9889e1f8b0930699bcc4ba21586928672024d
-  isLoaded: 1
-  isActive: 1
