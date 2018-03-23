@@ -18,8 +18,7 @@ public class BreathPS : MonoBehaviour {
 
 			for (int i = 0; i < numParticlesAlive; i++)
 			{
-				Debug.Log (i);
-				particles[i].velocity += Vector3.up * 20f;
+				particles[i].velocity += Vector3.up * 2f;
 			}
 
 			ps.SetParticles(particles, numParticlesAlive);
@@ -27,7 +26,14 @@ public class BreathPS : MonoBehaviour {
 
 
 		if (Input.GetKeyDown (KeyCode.Mouse1)) {
-			ps.Emit (20);
+			int numParticlesAlive = ps.GetParticles(particles);
+
+			for (int i = 0; i < numParticlesAlive; i++)
+			{
+				particles[i].velocity -= Vector3.up * 2f;
+			}
+
+			ps.SetParticles(particles, numParticlesAlive);
 		}
 	}
 }
