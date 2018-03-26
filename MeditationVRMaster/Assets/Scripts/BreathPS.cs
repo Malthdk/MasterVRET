@@ -7,12 +7,12 @@ public class BreathPS : MonoBehaviour {
 	private ParticleSystem ps;
 	private ParticleSystem.Particle[] particles;
 
-	void Awake () {
+    void Awake () {
 		ps = this.transform.GetComponent<ParticleSystem> ();
 		particles = new ParticleSystem.Particle[ps.main.maxParticles];
-	}
-	
-	void Update () {
+    }
+
+    void Update () {
 		if (Input.GetKeyDown (KeyCode.Mouse0)) {
 			int numParticlesAlive = ps.GetParticles(particles);
 

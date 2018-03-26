@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.445
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0.445}
+  m_IndirectSpecularColor: {r: 0.39428583, g: 0.4253857, b: 0.5409688, a: 0.445}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -489,7 +489,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1857882023
+  randomSeed: -686134974
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -28420,6 +28420,47 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 416562, guid: 548ad5876a2ff7a408da393e378bd988, type: 2}
   m_PrefabInternal: {fileID: 1306908851}
+--- !u!1 &1307460910
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1307460912}
+  - component: {fileID: 1307460911}
+  m_Layer: 0
+  m_Name: BluetoothConnection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1307460911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1307460910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01bcb2e8286028e4d9b662381ceda908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusText: {fileID: 0}
+--- !u!4 &1307460912
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1307460910}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -110.225845, y: 18.683292, z: 18.677086}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1308432156
 GameObject:
   m_ObjectHideFlags: 0
@@ -34356,7 +34397,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -336030084
+  randomSeed: 1260058334
   InitialModule:
     serializedVersion: 3
     enabled: 1
