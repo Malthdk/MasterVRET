@@ -6,19 +6,41 @@ public class BreathPS : MonoBehaviour {
 
 	private ParticleSystem ps;
 	private ParticleSystem.Particle[] particles;
+	private Vector3[] startingVel;
+	private bool gottenStartingVel = false;
+	private bool bluetoothConnected = true;
+
+	public float testingParam;
 
     void Awake () {
 		ps = this.transform.GetComponent<ParticleSystem> ();
-		particles = new ParticleSystem.Particle[ps.main.maxParticles];
+		particles = new ParticleSystem.Particle[1000];
     }
 
-    void Update () {
+    void LateUpdate () {
+
+		if (!gottenStartingVel) {
+			GetStartingVelocity ();
+			gottenStartingVel = true;
+		}
+
+		if (bluetoothConnected) {
+			int numParticlesAlive = ps.GetParticles(particles);
+
+			for (int i = 0; i < numParticlesAlive; i++)
+			{
+				particles[i].velocity = startingVel[i] * testingParam;
+			}
+
+			ps.SetParticles(particles, numParticlesAlive);
+		}
+
 		if (Input.GetKeyDown (KeyCode.Mouse0)) {
 			int numParticlesAlive = ps.GetParticles(particles);
 
 			for (int i = 0; i < numParticlesAlive; i++)
 			{
-				particles[i].velocity += Vector3.up * 2f;
+				particles[i].velocity = startingVel[i] * -1f;
 			}
 
 			ps.SetParticles(particles, numParticlesAlive);
@@ -30,10 +52,21 @@ public class BreathPS : MonoBehaviour {
 
 			for (int i = 0; i < numParticlesAlive; i++)
 			{
-				particles[i].velocity -= Vector3.up * 2f;
+				particles[i].velocity = startingVel[i] * 1f;
 			}
 
 			ps.SetParticles(particles, numParticlesAlive);
+		}
+	}
+
+	void GetStartingVelocity () { // THIS FUNCTION NEEDS TO BE CALLED SOMEWHERE AFTER START()
+		int numParticles = ps.GetParticles(particles);
+
+		startingVel = new Vector3[numParticles];
+
+		for (int i = 0; i < numParticles; i++)
+		{
+			startingVel[i] = particles[i].velocity;
 		}
 	}
 }

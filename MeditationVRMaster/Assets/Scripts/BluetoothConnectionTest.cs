@@ -24,6 +24,6 @@ public class BluetoothConnectionTest : MonoBehaviour {
     }
 
     void Update () {
-        Debug.Log("Bluetooth connection: " + device.IsConnected);
+       // Debug.Log("Bluetooth connection: " + device.IsConnected);
     }
 }
