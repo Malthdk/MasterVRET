@@ -10,16 +10,11 @@ public class BluetoothConnectionTest : MonoBehaviour {
 	public TextMesh connectionStatus;
 
 	void Awake () {
-        BluetoothAdapter.enableBluetooth();
+        BluetoothAdapter.askEnableBluetooth();
 
         device = new BluetoothDevice();
         device.Name = "HC-05";
 		device.connect();
-    }
-
-    void Start()
-    {
-        Connect();
     }
 
     public void Connect() {
