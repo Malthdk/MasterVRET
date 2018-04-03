@@ -7,6 +7,8 @@ public class BluetoothConnectionTest : MonoBehaviour {
 
     private BluetoothDevice device;
 
+	public TextMesh connectionStatus;
+
 	void Awake () {
         BluetoothAdapter.enableBluetooth();
 

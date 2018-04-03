@@ -35,25 +35,25 @@ public class HighRateTerminal : MonoBehaviour
 	}
 	
 	//############### UI BUTTONS RELATED METHODS #####################
-	public void showDevices ()
+	public void ShowDevices ()
 	{
 		BluetoothAdapter.showDevices ();//show a list of all devices//any picked device will be sent to this.HandleOnDevicePicked()
 	}
 	
-	public void connect ()//Connect to the public global variable "device" if it's not null.
+	public void Connect ()//Connect to the public global variable "device" if it's not null.
 	{
 		if (device != null) {
 			device.connect ();
 		}
 	}
 	
-	public void disconnect ()//Disconnect the public global variable "device" if it's not null.
+	public void Disconnect ()//Disconnect the public global variable "device" if it's not null.
 	{
 		if (device != null)
 			device.close ();
 	}
 	
-	public void send ()
+	public void Send ()
 	{		
 		if (device != null && !string.IsNullOrEmpty (dataToSend.text)) {
 			device.send (System.Text.Encoding.ASCII.GetBytes (dataToSend.text + (char)10));//10 is our seperator Byte (sepration between packets)
