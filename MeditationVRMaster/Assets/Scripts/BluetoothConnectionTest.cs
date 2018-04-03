@@ -13,7 +13,8 @@ public class BluetoothConnectionTest : MonoBehaviour {
         BluetoothAdapter.enableBluetooth();
 
         device = new BluetoothDevice();
-        device.MacAddress = "E4-A4-71-A7-FD-0F";
+        device.Name = "HC-05";
+		device.connect();
     }
 
     void Start()
