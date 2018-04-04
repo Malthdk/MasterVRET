@@ -8,7 +8,8 @@ public class BreathPS : MonoBehaviour {
 	private ParticleSystem.Particle[] particles;
 	private Vector3[] startingVel;
 	private bool gottenStartingVel = false;
-	private bool bluetoothConnected = true;
+
+	public Calibration calibrationScript;
 
 	public float testingParam;
 
@@ -24,12 +25,12 @@ public class BreathPS : MonoBehaviour {
 			gottenStartingVel = true;
 		}
 
-		if (bluetoothConnected) {
+		if (!calibrationScript.calibrating) {
 			int numParticlesAlive = ps.GetParticles(particles);
 
 			for (int i = 0; i < numParticlesAlive; i++)
 			{
-				particles[i].velocity = startingVel[i] * testingParam;
+				particles[i].velocity = startingVel[i] * calibrationScript.normRespData;
 			}
 
 			ps.SetParticles(particles, numParticlesAlive);

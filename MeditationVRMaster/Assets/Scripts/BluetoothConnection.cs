@@ -5,11 +5,14 @@ using System.Collections.Generic;
 using TechTweaking.Bluetooth;
 using UnityEngine.UI;
 
-public class BluetoothConnectionTest : MonoBehaviour
+public class BluetoothConnection : MonoBehaviour
 {
 
 	private  BluetoothDevice device;
+
 	public TextMesh statusText;
+
+	public float respValue; 
 
 	void Awake ()
 	{
@@ -35,6 +38,11 @@ public class BluetoothConnectionTest : MonoBehaviour
 		BluetoothAdapter.OnDeviceOFF += HandleOnDeviceOff;//This would mean a failure in connection! the reason might be that your remote device is OFF
 
 		BluetoothAdapter.OnDeviceNotFound += HandleOnDeviceNotFound; //Because connecting using the 'Name' property is just searching, the Plugin might not find it!(only for 'Name').
+	}
+
+	// DELETE THIS *ONLY USED FOR DEBUGGING*
+	void Update () {
+		respValue += 1f;
 	}
 
 	private void connect ()
@@ -115,9 +123,8 @@ public class BluetoothConnectionTest : MonoBehaviour
 
 			byte [] msg = device.read ();
 			if (msg != null) {
-
-
 				string content = System.Text.ASCIIEncoding.ASCII.GetString (msg);
+				respValue = float.Parse (content);
 				statusText.text = "MSG : " + content;
 			}
 			yield return null;
