@@ -28,6 +28,7 @@ public class Calibration : MonoBehaviour {
 		} 
 		if (!calibrating) {
 			normRespData = NormaliseData (btConnection.respValue);
+			calibrationText.text = normRespData.ToString();
 		}
 	}
 
