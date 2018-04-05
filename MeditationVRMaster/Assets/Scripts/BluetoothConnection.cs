@@ -40,11 +40,6 @@ public class BluetoothConnection : MonoBehaviour
 		BluetoothAdapter.OnDeviceNotFound += HandleOnDeviceNotFound; //Because connecting using the 'Name' property is just searching, the Plugin might not find it!(only for 'Name').
 	}
 
-	// DELETE THIS *ONLY USED FOR DEBUGGING*
-	void Update () {
-		respValue += 1f;
-	}
-
 	private void connect ()
 	{
 
