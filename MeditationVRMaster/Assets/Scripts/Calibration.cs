@@ -7,23 +7,28 @@ public class Calibration : MonoBehaviour {
 
 	[HideInInspector]
 	public List<float> caliDataList;
-	public bool calibrating = true;
+	public bool calibrating, finishedCalibrating;
 
 	public BluetoothConnection btConnection;
 
 	public TextMesh calibrationText;
 
-	public float calibrationDuration = 5f;
+	public float calibrationDuration;
 
 	public float normRespData;
 
 	void Start () {
 		caliDataList = new List<float>();
-		StartCoroutine ("Calibrate");
 	}
 
 	void Update () {
-		if (calibrating && btConnection.respValue != 0f) {
+
+		// Checks if button is pressed and starts calibration process
+		if (Input.GetMouseButtonDown(0) && calibrating != false) {
+			StartCoroutine ("Calibrate");
+		}
+			
+		if (calibrating && btConnection.respValue < 1000f && btConnection.respValue > 800f) {
 			caliDataList.Add (btConnection.respValue);
 		} 
 		if (!calibrating) {
@@ -46,5 +51,6 @@ public class Calibration : MonoBehaviour {
 		calibrating = true;
 		yield return new WaitForSeconds(calibrationDuration);
 		calibrating = false;
+		finishedCalibrating = true;
 	}
 }
