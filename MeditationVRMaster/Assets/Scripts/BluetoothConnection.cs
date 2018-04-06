@@ -9,6 +9,7 @@ public class BluetoothConnection : MonoBehaviour
 
 	private  BluetoothDevice device;
 	public TextMesh statusText;
+	public float respValue;
 
 	void Awake ()
 	{
@@ -118,6 +119,7 @@ public class BluetoothConnection : MonoBehaviour
 
 				string content = System.Text.ASCIIEncoding.ASCII.GetString (msg);
 				statusText.text = "MSG : " + content;
+				respValue = float.Parse (content);
 			}
 			yield return null;
 		}

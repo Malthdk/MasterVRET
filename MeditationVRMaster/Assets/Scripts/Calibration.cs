@@ -28,13 +28,13 @@ public class Calibration : MonoBehaviour {
 			StartCoroutine ("Calibrate");
 		}
 			
-/*		if (calibrating && btConnection.respValue < 1000f && btConnection.respValue > 800f) {
+		if (calibrating && btConnection.respValue < 1000f && btConnection.respValue > 800f) {
 			caliDataList.Add (btConnection.respValue);
 		} 
 		if (finishedCalibrating) {
 			normRespData = NormaliseData (btConnection.respValue);
 			calibrationText.text = normRespData.ToString();
-		}*/
+		}
 	}
 
 	// To range between -1 and 1
