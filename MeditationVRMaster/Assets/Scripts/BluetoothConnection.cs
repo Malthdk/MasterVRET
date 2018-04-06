@@ -17,20 +17,6 @@ public class BluetoothConnection : MonoBehaviour
 	void Awake ()
 	{
 		device = new BluetoothDevice ();
-
-		if (BluetoothAdapter.isBluetoothEnabled ()) {
-			connect ();
-		} else {
-
-			//BluetoothAdapter.enableBluetooth(); //you can by this force enabling Bluetooth without asking the user
-			statusText.text = "Status : Please enable your Bluetooth";
-
-			BluetoothAdapter.OnBluetoothStateChanged += HandleOnBluetoothStateChanged;
-			BluetoothAdapter.listenToBluetoothState (); // if you want to listen to the following two events  OnBluetoothOFF or OnBluetoothON
-
-			BluetoothAdapter.askEnableBluetooth ();//Ask user to enable Bluetooth
-
-		}
 	}
 
 	void Start ()
@@ -38,6 +24,24 @@ public class BluetoothConnection : MonoBehaviour
 		BluetoothAdapter.OnDeviceOFF += HandleOnDeviceOff;//This would mean a failure in connection! the reason might be that your remote device is OFF
 
 		BluetoothAdapter.OnDeviceNotFound += HandleOnDeviceNotFound; //Because connecting using the 'Name' property is just searching, the Plugin might not find it!(only for 'Name').
+	}
+
+	void Update ()
+	{
+		if (Input.GetMouseButtonDown (0)) {
+			if (BluetoothAdapter.isBluetoothEnabled ()) {
+				connect ();
+			} else {
+
+				//BluetoothAdapter.enableBluetooth(); //you can by this force enabling Bluetooth without asking the user
+				statusText.text = "Status : Please enable your Bluetooth";
+
+				BluetoothAdapter.OnBluetoothStateChanged += HandleOnBluetoothStateChanged;
+				BluetoothAdapter.listenToBluetoothState (); // if you want to listen to the following two events  OnBluetoothOFF or OnBluetoothON
+
+				BluetoothAdapter.askEnableBluetooth ();//Ask user to enable Bluetooth
+			}
+		}
 	}
 
 	private void connect ()

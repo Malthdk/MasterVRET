@@ -24,7 +24,7 @@ public class Calibration : MonoBehaviour {
 	void Update () {
 
 		// Checks if button is pressed and starts calibration process
-		if (Input.GetMouseButtonDown(0) && calibrating != false) {
+		if (Input.GetMouseButtonDown(0) && calibrating == false) {
 			StartCoroutine ("Calibrate");
 		}
 			
