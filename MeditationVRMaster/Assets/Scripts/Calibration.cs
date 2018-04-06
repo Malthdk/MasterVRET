@@ -35,7 +35,8 @@ public class Calibration : MonoBehaviour {
 
 		if (finishedCalibrating) {
 			normRespData = NormaliseData (btConnection.respValue);
-			calibrationText.text = normRespData.ToString();
+			calibrationText.text = btConnection.respValue.ToString();
+			//calibrationText.text = normRespData.ToString();
 		}
 	}
 
