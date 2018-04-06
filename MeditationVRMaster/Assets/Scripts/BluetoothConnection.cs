@@ -3,16 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 
 using TechTweaking.Bluetooth;
-using UnityEngine.UI;
 
 public class BluetoothConnection : MonoBehaviour
 {
 
 	private  BluetoothDevice device;
-
 	public TextMesh statusText;
-
-	public float respValue; 
 
 	void Awake ()
 	{
@@ -21,6 +17,7 @@ public class BluetoothConnection : MonoBehaviour
 		if (BluetoothAdapter.isBluetoothEnabled ()) {
 			connect ();
 		} else {
+
 			//BluetoothAdapter.enableBluetooth(); //you can by this force enabling Bluetooth without asking the user
 			statusText.text = "Status : Please enable your Bluetooth";
 
@@ -28,29 +25,32 @@ public class BluetoothConnection : MonoBehaviour
 			BluetoothAdapter.listenToBluetoothState (); // if you want to listen to the following two events  OnBluetoothOFF or OnBluetoothON
 
 			BluetoothAdapter.askEnableBluetooth ();//Ask user to enable Bluetooth
+
 		}
-    }
+	}
 
 	void Start ()
 	{
 		BluetoothAdapter.OnDeviceOFF += HandleOnDeviceOff;//This would mean a failure in connection! the reason might be that your remote device is OFF
-		BluetoothAdapter.OnDeviceNotFound += HandleOnDeviceNotFound; //Because connecting using the 'Name' property is just searching, the Plugin might not find it!(only for 'Name').
-	}
 
-	void Update () {
-		if (Input.GetMouseButtonDown (0)) {
-			connect ();
-		}
+		BluetoothAdapter.OnDeviceNotFound += HandleOnDeviceNotFound; //Because connecting using the 'Name' property is just searching, the Plugin might not find it!(only for 'Name').
 	}
 
 	private void connect ()
 	{
-		/* The Property device.MacAdress doesn't require pairing.Also Mac Adress in this library is Case sensitive,  all chars must be capital letters
+
+
+		statusText.text = "Status : Trying To Connect";
+
+
+		/* The Property device.MacAdress doesn't require pairing. 
+		 * Also Mac Adress in this library is Case sensitive,  all chars must be capital letters
 		 */
-		//device.MacAddress = "98:D3:32:31:30:0C";
+		//device.MacAddress = "XX:XX:XX:XX:XX:XX";
 
 		device.Name = "HC-05";
-		/* Trying to identefy a device by its name using the Property device.Name require the remote device to be paired
+		/* 
+		* Trying to identefy a device by its name using the Property device.Name require the remote device to be paired
 		* but you can try to alter the parameter 'allowDiscovery' of the Connect(int attempts, int time, bool allowDiscovery) method.
 		* allowDiscovery will try to locate the unpaired device, but this is a heavy and undesirable feature, and connection will take a longer time
 		*/
@@ -58,7 +58,7 @@ public class BluetoothConnection : MonoBehaviour
 		/*
 		* The ManageConnection Coroutine will start when the device is ready for reading.
 			*/
-		device.ReadingCoroutine = ManageConnection;
+			device.ReadingCoroutine = ManageConnection;
 
 
 		statusText.text = "Status : trying to connect";
@@ -84,8 +84,7 @@ public class BluetoothConnection : MonoBehaviour
 	{
 		if (!string.IsNullOrEmpty (dev.Name)) {
 			statusText.text = "Status : can't connect to '" + dev.Name + "', device is OFF ";
-		} else
-		if (!string.IsNullOrEmpty (dev.MacAddress)) {
+		} else if (!string.IsNullOrEmpty (dev.MacAddress)) {
 			statusText.text = "Status : can't connect to '" + dev.MacAddress + "', device is OFF ";
 		}
 	}
@@ -115,8 +114,9 @@ public class BluetoothConnection : MonoBehaviour
 
 			byte [] msg = device.read ();
 			if (msg != null) {
+
+
 				string content = System.Text.ASCIIEncoding.ASCII.GetString (msg);
-				respValue = float.Parse (content);
 				statusText.text = "MSG : " + content;
 			}
 			yield return null;
