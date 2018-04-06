@@ -26,12 +26,13 @@ public class BreathPS : MonoBehaviour {
 			gottenStartingVel = true;
 		}
 
+		/*
 		if (!calibrationScript.finishedCalibrating && !activated) {
 			this.gameObject.SetActive (false);
 		} else if (calibrationScript.finishedCalibrating && !activated) {
 			this.gameObject.SetActive (true);
 			activated = true;
-		}
+		}*/
 
 		if (calibrationScript.finishedCalibrating) {
 			int numParticlesAlive = ps.GetParticles(particles);
