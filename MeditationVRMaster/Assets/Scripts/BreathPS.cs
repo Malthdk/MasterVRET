@@ -20,7 +20,6 @@ public class BreathPS : MonoBehaviour {
 
     void LateUpdate () {
 
-
 		if (!gottenStartingVel) {
 			GetStartingVelocity ();
 			gottenStartingVel = true;

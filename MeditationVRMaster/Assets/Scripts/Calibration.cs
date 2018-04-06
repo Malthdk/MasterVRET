@@ -19,18 +19,20 @@ public class Calibration : MonoBehaviour {
 
 	void Start () {
 		caliDataList = new List<float>();
+		StartCoroutine ("Calibrate");
 	}
 
 	void Update () {
 
 		// Checks if button is pressed and starts calibration process
-		if (Input.GetMouseButtonDown(0) && calibrating == false) {
+		/*if (Input.GetMouseButtonDown(0) && calibrating == false) {
 			StartCoroutine ("Calibrate");
-		}
+		}*/
 			
-		if (calibrating && btConnection.respValue < 1000f && btConnection.respValue > 800f) {
+		if (calibrating) {
 			caliDataList.Add (btConnection.respValue);
 		} 
+
 		if (finishedCalibrating) {
 			normRespData = NormaliseData (btConnection.respValue);
 			calibrationText.text = normRespData.ToString();
