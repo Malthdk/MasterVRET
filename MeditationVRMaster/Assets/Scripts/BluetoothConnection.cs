@@ -17,43 +17,39 @@ public class BluetoothConnection : MonoBehaviour
 	void Awake ()
 	{
 		device = new BluetoothDevice ();
-    }
 
-	void Start ()
-	{
-		//BluetoothAdapter.OnDeviceOFF += HandleOnDeviceOff;//This would mean a failure in connection! the reason might be that your remote device is OFF
-		//BluetoothAdapter.OnDeviceNotFound += HandleOnDeviceNotFound; //Because connecting using the 'Name' property is just searching, the Plugin might not find it!(only for 'Name').
-	}
-
-	void Update () {
-		if (BluetoothAdapter.isBluetoothEnabled())
-		{
-			connect();
-		}
-		else
-		{
+		if (BluetoothAdapter.isBluetoothEnabled ()) {
+			connect ();
+		} else {
 			//BluetoothAdapter.enableBluetooth(); //you can by this force enabling Bluetooth without asking the user
 			statusText.text = "Status : Please enable your Bluetooth";
 
 			BluetoothAdapter.OnBluetoothStateChanged += HandleOnBluetoothStateChanged;
-			BluetoothAdapter.listenToBluetoothState(); // if you want to listen to the following two events  OnBluetoothOFF or OnBluetoothON
+			BluetoothAdapter.listenToBluetoothState (); // if you want to listen to the following two events  OnBluetoothOFF or OnBluetoothON
 
-			BluetoothAdapter.askEnableBluetooth();//Ask user to enable Bluetooth
+			BluetoothAdapter.askEnableBluetooth ();//Ask user to enable Bluetooth
+		}
+    }
+
+	void Start ()
+	{
+		BluetoothAdapter.OnDeviceOFF += HandleOnDeviceOff;//This would mean a failure in connection! the reason might be that your remote device is OFF
+		BluetoothAdapter.OnDeviceNotFound += HandleOnDeviceNotFound; //Because connecting using the 'Name' property is just searching, the Plugin might not find it!(only for 'Name').
+	}
+
+	void Update () {
+		if (Input.GetMouseButtonDown (0)) {
+			connect ();
 		}
 	}
 
 	private void connect ()
 	{
-
-
-		statusText.text = "Status : Trying To Connect";
-
-
 		/* The Property device.MacAdress doesn't require pairing.Also Mac Adress in this library is Case sensitive,  all chars must be capital letters
 		 */
-		device.MacAddress = "98:D3:32:31:30:0C";
+		//device.MacAddress = "98:D3:32:31:30:0C";
 
-		//device.Name = "HC-05";
+		device.Name = "HC-05";
 		/* Trying to identefy a device by its name using the Property device.Name require the remote device to be paired
 		* but you can try to alter the parameter 'allowDiscovery' of the Connect(int attempts, int time, bool allowDiscovery) method.
 		* allowDiscovery will try to locate the unpaired device, but this is a heavy and undesirable feature, and connection will take a longer time
