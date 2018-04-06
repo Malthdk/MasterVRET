@@ -29,7 +29,6 @@ public class BluetoothConnection : MonoBehaviour
 	void Update ()
 	{
 		if (Input.GetMouseButtonDown (0)) {
-			statusText.text = "Status : Button pressed";
 			if (BluetoothAdapter.isBluetoothEnabled ()) {
 				connect ();
 			} else {
@@ -91,9 +90,10 @@ public class BluetoothConnection : MonoBehaviour
 	//This would mean a failure in connection! the reason might be that your remote device is OFF
 	void HandleOnDeviceOff (BluetoothDevice dev)
 	{
-		if (!string.IsNullOrEmpty (dev.Name)) {
+		/* if (!string.IsNullOrEmpty (dev.Name)) {
 			statusText.text = "Status : can't connect to '" + dev.Name + "', device is OFF ";
-		} else if (!string.IsNullOrEmpty (dev.MacAddress)) {
+		} else */
+		if (!string.IsNullOrEmpty (dev.MacAddress)) {
 			statusText.text = "Status : can't connect to '" + dev.MacAddress + "', device is OFF ";
 		}
 	}
