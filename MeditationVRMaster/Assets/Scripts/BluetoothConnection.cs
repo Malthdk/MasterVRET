@@ -29,6 +29,7 @@ public class BluetoothConnection : MonoBehaviour
 	void Update ()
 	{
 		if (Input.GetMouseButtonDown (0)) {
+			statusText.text = "Status : Button pressed";
 			if (BluetoothAdapter.isBluetoothEnabled ()) {
 				connect ();
 			} else {
