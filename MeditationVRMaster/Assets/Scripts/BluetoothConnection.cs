@@ -118,8 +118,8 @@ public class BluetoothConnection : MonoBehaviour
 
 
 				string content = System.Text.ASCIIEncoding.ASCII.GetString (msg);
-				statusText.text = "MSG : " + content;
 				respValue = float.Parse (content);
+				statusText.text = "MSG : " + respValue.ToString();
 			}
 			yield return null;
 		}
