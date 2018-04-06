@@ -31,7 +31,7 @@ public class Calibration : MonoBehaviour {
 		if (calibrating && btConnection.respValue < 1000f && btConnection.respValue > 800f) {
 			caliDataList.Add (btConnection.respValue);
 		} 
-		if (!calibrating) {
+		if (finishedCalibrating) {
 			normRespData = NormaliseData (btConnection.respValue);
 			calibrationText.text = normRespData.ToString();
 		}
