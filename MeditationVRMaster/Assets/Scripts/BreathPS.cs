@@ -11,7 +11,6 @@ public class BreathPS : MonoBehaviour {
 
 	public Calibration calibrationScript;
 
-	public float testingParam;
 
     void Awake () {
 		ps = this.transform.GetComponent<ParticleSystem> ();
@@ -23,22 +22,15 @@ public class BreathPS : MonoBehaviour {
 		if (!gottenStartingVel) {
 			GetStartingVelocity ();
 			gottenStartingVel = true;
+			gameObject.SetActive (false);
 		}
-
-		/*
-		if (!calibrationScript.finishedCalibrating && !activated) {
-			this.gameObject.SetActive (false);
-		} else if (calibrationScript.finishedCalibrating && !activated) {
-			this.gameObject.SetActive (true);
-			activated = true;
-		}*/
 
 		if (calibrationScript.finishedCalibrating) {
 			int numParticlesAlive = ps.GetParticles(particles);
 
 			for (int i = 0; i < numParticlesAlive; i++)
 			{
-				particles[i].velocity = startingVel[i] * calibrationScript.normRespData;
+				particles[i].velocity = startingVel[i] * calibrationScript.normRespData * -1f;
 			}
 
 			ps.SetParticles(particles, numParticlesAlive);

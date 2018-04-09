@@ -35,13 +35,29 @@ public class BluetoothConnection : MonoBehaviour
 		BluetoothAdapter.OnDeviceOFF += HandleOnDeviceOff;//This would mean a failure in connection! the reason might be that your remote device is OFF
 
 		BluetoothAdapter.OnDeviceNotFound += HandleOnDeviceNotFound; //Because connecting using the 'Name' property is just searching, the Plugin might not find it!(only for 'Name').
+		statusText.gameObject.SetActive (false);
+	}
+
+	void Update() {
+		if (device.IsConnected) {
+			ManageConnection (device);
+		}
+
+		if (Input.GetMouseButtonDown(0)) {
+			if (statusText.gameObject.activeInHierarchy) {
+				statusText.gameObject.SetActive (false);
+			} else {
+				statusText.gameObject.SetActive (true);
+			} 
+		}
 	}
 
 	private void connect ()
 	{
 
-
-		statusText.text = "Status : Trying To Connect";
+		if (statusText != null) {
+			statusText.text = "Status : Trying To Connect";
+		}
 
 
 		/* The Property device.MacAdress doesn't require pairing. 
@@ -59,10 +75,7 @@ public class BluetoothConnection : MonoBehaviour
 		/*
 		* The ManageConnection Coroutine will start when the device is ready for reading.
 			*/
-			device.ReadingCoroutine = ManageConnection;
-
-
-		statusText.text = "Status : trying to connect";
+		//device.ReadingCoroutine = ManageConnection;
 
 		device.connect ();
 
@@ -84,9 +97,13 @@ public class BluetoothConnection : MonoBehaviour
 	void HandleOnDeviceOff (BluetoothDevice dev)
 	{
 		if (!string.IsNullOrEmpty (dev.Name)) {
-			statusText.text = "Status : can't connect to '" + dev.Name + "', device is OFF ";
+			if (statusText != null) {
+				statusText.text = "Status : can't connect to '" + dev.Name + "', device is OFF ";
+			}
 		} else if (!string.IsNullOrEmpty (dev.MacAddress)) {
-			statusText.text = "Status : can't connect to '" + dev.MacAddress + "', device is OFF ";
+			if (statusText != null) {
+				statusText.text = "Status : can't connect to '" + dev.MacAddress + "', device is OFF ";
+			}
 		}
 	}
 
@@ -107,24 +124,18 @@ public class BluetoothConnection : MonoBehaviour
 
 	//############### Reading Data  #####################
 	//Please note that you don't have to use this Couroutienes/IEnumerator, you can just put your code in the Update() method.
-	IEnumerator  ManageConnection (BluetoothDevice device)
+	void  ManageConnection (BluetoothDevice device)
 	{
-		statusText.text = "Status : Connected & Can read";
-
-		while (device.IsReading) {
-
+		if (device.IsReading) {
 			byte [] msg = device.read ();
 			if (msg != null) {
-
-
 				string content = System.Text.ASCIIEncoding.ASCII.GetString (msg);
+				if (statusText != null) {
+					statusText.text = content;
+				}
 				respValue = float.Parse (content);
-				statusText.text = "MSG : " + respValue.ToString();
 			}
-			yield return null;
 		}
-
-		statusText.text = "Status : Done Reading";
 	}
 
 

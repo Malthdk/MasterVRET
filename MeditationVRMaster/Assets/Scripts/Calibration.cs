@@ -13,12 +13,20 @@ public class Calibration : MonoBehaviour {
 
 	public TextMesh calibrationText;
 
+	[TextArea]
+	public string welcomeText;
+
 	public float calibrationDuration;
 
 	public float normRespData;
 
-	void Start () {
+	public GameObject respiParticleSystem;
+
+	void Awake() {
 		caliDataList = new List<float>();
+	}
+
+	void Start () {
 		StartCoroutine ("Calibrate");
 	}
 
@@ -29,14 +37,12 @@ public class Calibration : MonoBehaviour {
 			StartCoroutine ("Calibrate");
 		}*/
 			
-		if (calibrating) {
+		if (calibrating && btConnection.respValue < 1000f && btConnection.respValue > 800f) {
 			caliDataList.Add (btConnection.respValue);
 		} 
 
-		if (finishedCalibrating) {
+		if (finishedCalibrating && btConnection.respValue < 1000f && btConnection.respValue > 800f) {
 			normRespData = NormaliseData (btConnection.respValue);
-			calibrationText.text = btConnection.respValue.ToString();
-			//calibrationText.text = normRespData.ToString();
 		}
 	}
 
@@ -52,7 +58,10 @@ public class Calibration : MonoBehaviour {
 	IEnumerator Calibrate()
 	{
 		calibrating = true;
+		calibrationText.text = welcomeText;
 		yield return new WaitForSeconds(calibrationDuration);
+		respiParticleSystem.SetActive (true);
+		calibrationText.text = " ";
 		calibrating = false;
 		finishedCalibrating = true;
 	}
