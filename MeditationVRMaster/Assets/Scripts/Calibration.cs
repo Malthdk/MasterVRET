@@ -10,8 +10,7 @@ public class Calibration : MonoBehaviour {
 	public bool calibrating, finishedCalibrating;
 
 	public BluetoothConnection btConnection;
-
-	public TextMesh calibrationText;
+	public Intro introScript;
 
 	[TextArea]
 	public string welcomeText;
@@ -26,23 +25,13 @@ public class Calibration : MonoBehaviour {
 		caliDataList = new List<float>();
 	}
 
-	void Start () {
-		StartCoroutine ("Calibrate");
-	}
-
 	void Update () {
-
-		// Checks if button is pressed and starts calibration process
-		/*if (Input.GetMouseButtonDown(0) && calibrating == false) {
-			StartCoroutine ("Calibrate");
-		}*/
-			
-		if (calibrating && btConnection.respValue < 1000f && btConnection.respValue > 800f) {
-			caliDataList.Add (btConnection.respValue);
-		} 
-
 		if (finishedCalibrating && btConnection.respValue < 1000f && btConnection.respValue > 800f) {
 			normRespData = NormaliseData (btConnection.respValue);
+		}
+
+		if (introScript.startCalibration && !calibrating && !finishedCalibrating) {
+			StartCoroutine ("Calibrate");
 		}
 	}
 
@@ -55,13 +44,20 @@ public class Calibration : MonoBehaviour {
 		return normData;
 	}
 
-	IEnumerator Calibrate()
+	public IEnumerator Calibrate()
 	{
+		float t = 0;
 		calibrating = true;
-		calibrationText.text = welcomeText;
-		yield return new WaitForSeconds(calibrationDuration);
-		respiParticleSystem.SetActive (true);
-		calibrationText.text = " ";
+
+		while (t < calibrationDuration) {
+			t += Time.deltaTime;
+			if (btConnection.respValue < 1000f && btConnection.respValue > 800f) {
+				caliDataList.Add (btConnection.respValue);
+			} 
+			// Wait one frame, and repeat.
+			yield return null;
+		}
+
 		calibrating = false;
 		finishedCalibrating = true;
 	}

@@ -22,7 +22,6 @@ public class BreathPS : MonoBehaviour {
 		if (!gottenStartingVel) {
 			GetStartingVelocity ();
 			gottenStartingVel = true;
-			gameObject.SetActive (false);
 		}
 
 		if (calibrationScript.finishedCalibrating) {

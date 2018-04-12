@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 using TechTweaking.Bluetooth;
 
@@ -10,6 +11,8 @@ public class BluetoothConnection : MonoBehaviour
 	private  BluetoothDevice device;
 	public TextMesh statusText;
 	public float respValue;
+
+	public bool connected, notConnected;
 
 	void Awake ()
 	{
@@ -43,13 +46,14 @@ public class BluetoothConnection : MonoBehaviour
 			ManageConnection (device);
 		}
 
+		/*
 		if (Input.GetMouseButtonDown(0)) {
 			if (statusText.gameObject.activeInHierarchy) {
 				statusText.gameObject.SetActive (false);
 			} else {
 				statusText.gameObject.SetActive (true);
 			} 
-		}
+		}*/
 	}
 
 	private void connect ()
@@ -57,6 +61,8 @@ public class BluetoothConnection : MonoBehaviour
 
 		if (statusText != null) {
 			statusText.text = "Status : Trying To Connect";
+			connected = false;
+			notConnected = true;
 		}
 
 
@@ -99,10 +105,14 @@ public class BluetoothConnection : MonoBehaviour
 		if (!string.IsNullOrEmpty (dev.Name)) {
 			if (statusText != null) {
 				statusText.text = "Status : can't connect to '" + dev.Name + "', device is OFF ";
+				notConnected = true;
+				connected = false;
 			}
 		} else if (!string.IsNullOrEmpty (dev.MacAddress)) {
 			if (statusText != null) {
 				statusText.text = "Status : can't connect to '" + dev.MacAddress + "', device is OFF ";
+				notConnected = true;
+				connected = false;
 			}
 		}
 	}
@@ -127,6 +137,8 @@ public class BluetoothConnection : MonoBehaviour
 	void  ManageConnection (BluetoothDevice device)
 	{
 		if (device.IsReading) {
+			connected = true;
+			notConnected = false;
 			byte [] msg = device.read ();
 			if (msg != null) {
 				string content = System.Text.ASCIIEncoding.ASCII.GetString (msg);
