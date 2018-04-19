@@ -88,7 +88,7 @@ public class Intro : MonoBehaviour
 
 	IEnumerator StartCalibration() {
 		startCalibration = true;
-		yield return new WaitForSeconds (delay+3f);
+		yield return new WaitForSeconds (delay+5f);
 		StartCoroutine(FadeTo(calibrationPanelImage, 1f, 1f));
 		StartCoroutine(FadeTo(calibrationText, 1f, 1f));
 		float t = 0;
