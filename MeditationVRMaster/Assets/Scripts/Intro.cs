@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Intro : MonoBehaviour
 {
-	public GameObject particleSystem;
+	public GameObject particleSystem, breathingCanvas;
 	public Calibration calibrationScript;
 	public BluetoothConnection btScript;
 	public Text calibrationText, title;
@@ -105,6 +105,7 @@ public class Intro : MonoBehaviour
 		StartCoroutine(FadeTo(calibrationPanelImage, 0f, 1f));
 		StartCoroutine(FadeTo(calibrationText, 0f, 1.5f));
 		StartCoroutine(FadeTo(calibrationImage, 0f, 1f));
+		StartCoroutine(FadeTo(title, 0f, 1.2f));
 		index++;
 		if (index < textObjects.Length) {
 			StartCoroutine ("ChangeText");
@@ -114,10 +115,10 @@ public class Intro : MonoBehaviour
 	IEnumerator EndIntro() {
 		StartCoroutine(FadeTo(logo, 0f, 3f));
 		StartCoroutine(FadeTo(textObjects[2], 0f, 1.5f));
-		StartCoroutine(FadeTo(title, 0f, 1.7f));
 		StartCoroutine(FadeTo(mainBackground, 0f, 2f));
 		yield return new WaitForSeconds (3f);
 		particleSystem.SetActive (true);
+		breathingCanvas.SetActive (true);
 		gameObject.SetActive (false);
 	}
 

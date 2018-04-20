@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Linq;
 
-public class DisplayData : MonoBehaviour {
+public class EEGListener : MonoBehaviour {
 	
 	public Texture2D[] signalIcons;
 	public Text raw;
@@ -14,27 +14,27 @@ public class DisplayData : MonoBehaviour {
 	
     ThinkGearController controller;
 	
-	private int Raw = 0;
-	private int PoorSignal = 200;
-	private int Attention = 0;
-	private int Meditation = 0;
-	private int Blink = 0;
-	private float Delta = 0.0f;
-	private float Theta = 0.0f;
-	private float LowAlpha = 0.0f;
-	private float HighAlpha = 0.0f;
-	private float LowBeta = 0.0f;
-	private float HighBeta = 0.0f;
-	private float LowGamma = 0.0f;
-	private float HighGamma = 0.0f;
+	public int Raw = 0;
+	public int PoorSignal = 200;
+	public int Attention = 0;
+	public int Meditation = 0;
+	public int Blink = 0;
+	public float Delta = 0.0f;
+	public float Theta = 0.0f;
+	public float LowAlpha = 0.0f;
+	public float HighAlpha = 0.0f;
+	public float LowBeta = 0.0f;
+	public float HighBeta = 0.0f;
+	public float LowGamma = 0.0f;
+	public float HighGamma = 0.0f;
 
-    private int Algo_Attention = 0;
-    private int Algo_Meditation = 0;
-    private float Algo_Delta = 0.0f;
-    private float Algo_Theta = 0.0f;
-    private float Algo_Alpha = 0.0f;
-    private float Algo_Beta = 0.0f;
-    private float Algo_Gamma = 0.0f;
+	public int Algo_Attention = 0;
+	public int Algo_Meditation = 0;
+	public float Algo_Delta = 0.0f;
+	public float Algo_Theta = 0.0f;
+	public float Algo_Alpha = 0.0f;
+	public float Algo_Beta = 0.0f;
+	public float Algo_Gamma = 0.0f;
 
 
 
@@ -187,11 +187,9 @@ public class DisplayData : MonoBehaviour {
 		}
 
 		averageAlpha = alphaData.Average ();
-
 		StartCoroutine ("CalcAverageAlpha");
 	}
 
-	//添加到数组，不添加重复的对象
 	void Add2DeviceListArray(string element){
 		string mfgid = "";
 		string name = "";
