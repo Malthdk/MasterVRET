@@ -23,7 +23,8 @@ public class BluetoothConnection : MonoBehaviour
 		} else {
 
 			//BluetoothAdapter.enableBluetooth(); //you can by this force enabling Bluetooth without asking the user
-			statusText.text = "Status : Please enable your Bluetooth";
+			if (statusText != null)
+				statusText.text = "Status : Please enable your Bluetooth";
 
 			BluetoothAdapter.OnBluetoothStateChanged += HandleOnBluetoothStateChanged;
 			BluetoothAdapter.listenToBluetoothState (); // if you want to listen to the following two events  OnBluetoothOFF or OnBluetoothON
@@ -45,15 +46,6 @@ public class BluetoothConnection : MonoBehaviour
 		if (device.IsConnected) {
 			ManageConnection (device);
 		}
-
-		/*
-		if (Input.GetMouseButtonDown(0)) {
-			if (statusText.gameObject.activeInHierarchy) {
-				statusText.gameObject.SetActive (false);
-			} else {
-				statusText.gameObject.SetActive (true);
-			} 
-		}*/
 	}
 
 	private void connect ()
@@ -61,10 +53,10 @@ public class BluetoothConnection : MonoBehaviour
 
 		if (statusText != null) {
 			statusText.text = "Status : Trying To Connect";
-			connected = false;
-			notConnected = true;
 		}
 
+		connected = false;
+		notConnected = true;
 
 		/* The Property device.MacAdress doesn't require pairing. 
 		 * Also Mac Adress in this library is Case sensitive,  all chars must be capital letters

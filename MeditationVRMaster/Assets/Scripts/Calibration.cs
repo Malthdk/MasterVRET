@@ -6,15 +6,15 @@ using System.Linq;
 public class Calibration : MonoBehaviour {
 
 	[HideInInspector]
-	public List<float> respCaliDataList, alhpaCaliDataList, alphaDataList;
+	public List<float> respCaliDataList, alhpaCaliDataList;
 	public bool calibrating, finishedCalibrating;
 
 	public BluetoothConnection btConnection;
 	public EEGListener eegListener;
 	public Intro introScript;
 
-	public float calibrationDuration, normRespData, normAlphaData, avgAlpha, alphaVariance;
-	public GameObject respiParticleSystem;
+	public float calibrationDuration, normRespData, alphaAvg;
+	public GameObject respiParticleSystem, eegManager;
 
 	void Awake() {
 		respCaliDataList = new List<float>();
@@ -24,10 +24,6 @@ public class Calibration : MonoBehaviour {
 	void Update () {
 		if (finishedCalibrating && btConnection.respValue < 1000f && btConnection.respValue > 800f) {
 			normRespData = NormaliseData (respCaliDataList ,btConnection.respValue);
-		} 
-		// NOT USING THIS - NEED TO FIGURE OUT HOW TO USE BASELINE EEG
-		if (finishedCalibrating) {
-			normAlphaData = NormaliseData (alhpaCaliDataList, eegListener.LowAlpha);
 		} 
 		if (introScript.startCalibration && !calibrating && !finishedCalibrating) {
 			StartCoroutine ("Calibrate");
@@ -43,22 +39,6 @@ public class Calibration : MonoBehaviour {
 		return normData;
 	}
 
-	// NEED TO RETHINK THIS ONE (NOT ACCURATE ENOUGH!!!!!)
-	public IEnumerator AlphaVariance()
-	{
-		float oldAvgAlpha = avgAlpha;
-		float t = 0;
-		while (t < 5f) {
-			t += Time.deltaTime;
-			alphaDataList.Add (eegListener.LowAlpha);
-			// Wait one frame, and repeat.
-			yield return null;
-		}
-		avgAlpha = alphaDataList.Average ();
-		alphaVariance = avgAlpha / oldAvgAlpha;
-		StartCoroutine ("AlphaVariance");
-	}
-
 	public IEnumerator Calibrate()
 	{
 		float t = 0;
@@ -68,11 +48,12 @@ public class Calibration : MonoBehaviour {
 			if (btConnection.respValue < 1000f && btConnection.respValue > 800f) {
 				respCaliDataList.Add (btConnection.respValue);
 			} 
-			// NOT USING THIS - NEED TO FIGURE OUT HOW TO USE BASELINE EEG
 			alhpaCaliDataList.Add (eegListener.LowAlpha);
 			// Wait one frame, and repeat.
 			yield return null;
 		}
+		alphaAvg = alhpaCaliDataList.Average();
+		eegManager.SetActive (true);
 		calibrating = false;
 		finishedCalibrating = true;
 	}

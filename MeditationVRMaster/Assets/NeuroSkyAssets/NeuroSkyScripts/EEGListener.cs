@@ -7,10 +7,7 @@ using System.Linq;
 public class EEGListener : MonoBehaviour {
 	
 	public Texture2D[] signalIcons;
-	public Text raw;
-	public Text highalpha;
-	public Text lowalpha;
-	public Text avg;
+	public Text raw, signal, medi, alpha, algoAlpha;
 	
     ThinkGearController controller;
 	
@@ -42,12 +39,10 @@ public class EEGListener : MonoBehaviour {
     private bool showListViewFlag = false;
 	private ArrayList deviceList;
 	private ArrayList displayedStrArr;
-	Vector2 scrollPosition ;
-	Rect windowRect ;
 
 	private List<float> alphaData;
 	public float averageAlpha;
-	// Use this for initialization
+
 	void Start () {
 		controller = GameObject.Find("ThinkGear").GetComponent<ThinkGearController>();
 
@@ -82,7 +77,7 @@ public class EEGListener : MonoBehaviour {
 		displayedStrArr = new ArrayList();
 		alphaData = new List<float>();
 
-		StartCoroutine ("CalcAverageAlpha");
+		//StartCoroutine ("CalcAverageAlpha");
 	}
 
     void OnAlgo_UpdateAttentionEvent(int value)
@@ -163,17 +158,18 @@ public class EEGListener : MonoBehaviour {
 	void OnUpdateDeviceInfo(string deviceInfo){
 		//deviceFound deviceInfo = NSF4F1BF;MindWave Mobile;BAFCEB11-2DB6-70B3-B038-B4AD2EFC6309
 		// FMGID ; name ; ConnectId
-		print ("Unity  Test DeviceInfo = "+deviceInfo);
 		Add2DeviceListArray(deviceInfo);
 	}
 
 	void Update(){
-		raw.text = Raw.ToString();
-		avg.text = averageAlpha.ToString();
-		highalpha.text = HighAlpha.ToString();
-		lowalpha.text = LowAlpha.ToString();
+		raw.text = "Raw data: " + Raw.ToString();
+		signal.text = "Signal data: " + PoorSignal.ToString();
+		medi.text = "Medi data: " + Meditation.ToString();
+		alpha.text = "Alpha data: " + LowAlpha.ToString();
+		algoAlpha.text = "AlgoAlpha data: " + Algo_Alpha.ToString();
 	}
 
+	/*
 	IEnumerator CalcAverageAlpha() {
 		float t = 0;
 		float tempAlpha;
@@ -188,7 +184,7 @@ public class EEGListener : MonoBehaviour {
 
 		averageAlpha = alphaData.Average ();
 		StartCoroutine ("CalcAverageAlpha");
-	}
+	}*/
 
 	void Add2DeviceListArray(string element){
 		string mfgid = "";
