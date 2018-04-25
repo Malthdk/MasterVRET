@@ -9,10 +9,11 @@ public class BluetoothConnection : MonoBehaviour
 {
 
 	private  BluetoothDevice device;
+	public EEGListener eegListener;
 	public TextMesh statusText;
 	public float respValue;
 
-	public bool connected, notConnected;
+	public bool respConnected, tgConnected;
 
 	void Awake ()
 	{
@@ -46,6 +47,28 @@ public class BluetoothConnection : MonoBehaviour
 		if (device.IsConnected) {
 			ManageConnection (device);
 		}
+
+		if (Input.GetMouseButtonDown (0) && !tgConnected) {
+			UnityThinkGear.Init (true);
+			UnityThinkGear.StartStream ();
+		}
+
+		if (Input.GetMouseButtonDown (0) && tgConnected) {
+			if (BluetoothAdapter.isBluetoothEnabled ()) {
+				connect ();
+			} else {
+				BluetoothAdapter.enableBluetooth(); //you can by this force enabling Bluetooth without asking the user
+				if (statusText != null)
+					statusText.text = "Status : Please enable your Bluetooth";
+
+				BluetoothAdapter.OnBluetoothStateChanged += HandleOnBluetoothStateChanged;
+				BluetoothAdapter.listenToBluetoothState (); // if you want to listen to the following two events  OnBluetoothOFF or OnBluetoothON
+			}
+		}
+
+		if (eegListener.PoorSignal < 80) {
+			tgConnected = true;
+		}
 	}
 
 	private void connect ()
@@ -55,8 +78,7 @@ public class BluetoothConnection : MonoBehaviour
 			statusText.text = "Status : Trying To Connect";
 		}
 
-		connected = false;
-		notConnected = true;
+		respConnected = false;
 
 		/* The Property device.MacAdress doesn't require pairing. 
 		 * Also Mac Adress in this library is Case sensitive,  all chars must be capital letters
@@ -97,14 +119,12 @@ public class BluetoothConnection : MonoBehaviour
 		if (!string.IsNullOrEmpty (dev.Name)) {
 			if (statusText != null) {
 				statusText.text = "Status : can't connect to '" + dev.Name + "', device is OFF ";
-				notConnected = true;
-				connected = false;
+				respConnected = false;
 			}
 		} else if (!string.IsNullOrEmpty (dev.MacAddress)) {
 			if (statusText != null) {
 				statusText.text = "Status : can't connect to '" + dev.MacAddress + "', device is OFF ";
-				notConnected = true;
-				connected = false;
+				respConnected = false;
 			}
 		}
 	}
@@ -129,8 +149,7 @@ public class BluetoothConnection : MonoBehaviour
 	void  ManageConnection (BluetoothDevice device)
 	{
 		if (device.IsReading) {
-			connected = true;
-			notConnected = false;
+			respConnected = true;
 			byte [] msg = device.read ();
 			if (msg != null) {
 				string content = System.Text.ASCIIEncoding.ASCII.GetString (msg);

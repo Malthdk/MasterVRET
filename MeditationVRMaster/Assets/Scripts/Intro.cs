@@ -10,7 +10,7 @@ public class Intro : MonoBehaviour
 	public BluetoothConnection btScript;
 	public Text calibrationText, title;
 	public Text[] textObjects;
-	public Image calibrationPanelImage, calibrationImage, logo, mainBackground, btImage;
+	public Image calibrationPanelImage, calibrationImage, logo, mainBackground, btImageResp, btImageEEG;
 	public float delay = 1f;
 
 	[HideInInspector]
@@ -30,7 +30,7 @@ public class Intro : MonoBehaviour
 
 	void Update() {
 		// If mouse button is down and we are not calibrating
-		if (Input.GetMouseButtonDown (0) && !startCalibration && !textChanging) {
+		if (Input.GetMouseButtonDown (0) && !startCalibration && !textChanging && btScript.tgConnected) {
 			textChanging = true;
 			index++;
 			if (index < textObjects.Length) {
@@ -46,12 +46,25 @@ public class Intro : MonoBehaviour
 		}
 
 		// Used to display bluetooth icon
-		if (btScript.connected && !btConnected) {
-			btImage.color = Color.green;
-			StartCoroutine(FadeTo(btImage, 0f, 5f));
-			btConnected = true;
-		} else if (!btScript.connected && !btConnected) {
-			btImage.color = Color.red;
+		if (!btScript.respConnected || !btScript.tgConnected) {
+			DisplayBluetooth ();
+		}
+	}
+
+	void DisplayBluetooth() {
+		if (btScript.respConnected && !btConnected) {
+			btImageResp.color = Color.green;
+		} else if (!btScript.respConnected && !btConnected) {
+			btImageResp.color = Color.red;
+		}
+		if (btScript.tgConnected && !btConnected) {
+			btImageEEG.color = Color.green;
+		} else if (!btScript.tgConnected && !btConnected) {
+			btImageEEG.color = Color.red;
+		}
+		if (btScript.tgConnected && btScript.respConnected) {
+			StartCoroutine(FadeTo(btImageResp, 0f, 5f));
+			StartCoroutine(FadeTo(btImageEEG, 0f, 5.5f));
 		}
 	}
 

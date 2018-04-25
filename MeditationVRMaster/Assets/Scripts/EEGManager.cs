@@ -1,4 +1,72 @@
 ﻿using System.Collections;
+using System.IO;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using System.Linq;
+
+public class EEGManager : MonoBehaviour {
+
+	public Calibration calibrationScript;
+	public EEGListener eegScript;
+
+	public Text debugText, debugText2;
+
+	StreamWriter sw;
+
+	public float calculationDuration = 3f;
+
+	private List<float> meditationDataList;
+
+	private float meditationAvg, fogAmount;
+
+	void Start () {
+		meditationDataList = new List<float>();
+
+		// Starts calculating the average of the mediation value within 5s and map the values
+		StartCoroutine ("CalculateAverage");
+	}
+
+	void Update () {
+		RenderSettings.fogEndDistance = fogAmount;
+	}
+
+	IEnumerator MeditationMapping() 
+	{
+		float fogAmountOld = fogAmount;
+		float fogAmountNew = 50 + (meditationAvg * 5.8f);				// Value needs to range from 50 to 650
+
+		float t = 0;
+		while (t < calculationDuration) {
+			t += Time.deltaTime;
+			// Turn the time into an interpolation factor between 0 and 1.
+			float blend = Mathf.Clamp01 (t / calculationDuration);
+			fogAmount = Mathf.Lerp (fogAmountOld, fogAmountNew, blend);
+			debugText.text = "Fog amount: " + fogAmount.ToString ();
+			yield return null;
+		}
+	}
+
+	IEnumerator CalculateAverage() 
+	{
+		float t = 0;
+		while (t < calculationDuration) {
+			t += Time.deltaTime;
+			meditationDataList.Add (eegScript.Meditation);
+			yield return null;
+		}
+		meditationAvg = meditationDataList.Average ();
+		debugText.text = "Medi avg: " + meditationAvg.ToString ();
+		meditationDataList.Clear ();
+		StartCoroutine ("MeditationMapping");
+		StartCoroutine ("CalculateAverage");
+	}
+}
+
+/*
+
+using System.Collections;
+using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +79,8 @@ public class EEGManager : MonoBehaviour {
 	public Material treeMat;
 	public Water waterScript;
 	public Text debugText, debugText2;
+
+	StreamWriter sw;
 
 	public float calculationDuration = 5f;
 
@@ -64,10 +134,10 @@ public class EEGManager : MonoBehaviour {
 		float waterNew = 1f - (meditationAvg/100);
 
 		float t = 0;
-		while (t < 1f) {
+		while (t < calculationDuration) {
 			t += Time.deltaTime;
 			// Turn the time into an interpolation factor between 0 and 1.
-			float blend = Mathf.Clamp01 (t / 1f);
+			float blend = Mathf.Clamp01 (t / calculationDuration);
 			windSpeed = Mathf.Clamp (Mathf.Lerp (speedOld, speedNew, blend), .2f, 1.8f);
 			windDisplacement = Mathf.Lerp (windOld, windNew, blend);
 			waterFrequency = Mathf.Lerp (waterOld, waterNew, blend);
@@ -125,5 +195,5 @@ public class EEGManager : MonoBehaviour {
 		debugText.text = "Alpha variance: " + alphaVariance.ToString();
 		StartCoroutine ("AlphaVariance");
 		StartCoroutine ("CalcWindVar");
-	}*/
-}
+	}
+}*/

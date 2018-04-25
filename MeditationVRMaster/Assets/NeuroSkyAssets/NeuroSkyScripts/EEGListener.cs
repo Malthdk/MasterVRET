@@ -33,6 +33,7 @@ public class EEGListener : MonoBehaviour {
 	public float Algo_Beta = 0.0f;
 	public float Algo_Gamma = 0.0f;
 
+	public string ConnectState;
 
 
     //Tommy add 20161020
@@ -46,6 +47,7 @@ public class EEGListener : MonoBehaviour {
 	void Start () {
 		controller = GameObject.Find("ThinkGear").GetComponent<ThinkGearController>();
 
+		controller.UpdateConnectStateEvent += OnUpdateConnectState;
 		controller.UpdateRawdataEvent += OnUpdateRaw;
 		controller.UpdatePoorSignalEvent += OnUpdatePoorSignal;
 		controller.UpdateAttentionEvent += OnUpdateAttention;
@@ -76,10 +78,12 @@ public class EEGListener : MonoBehaviour {
 		deviceList = new ArrayList();
 		displayedStrArr = new ArrayList();
 		alphaData = new List<float>();
-
-		//StartCoroutine ("CalcAverageAlpha");
 	}
 
+	void OnUpdateConnectState(string value)
+	{
+		ConnectState = value;
+	}
     void OnAlgo_UpdateAttentionEvent(int value)
     {
         Algo_Attention = value;
@@ -164,27 +168,8 @@ public class EEGListener : MonoBehaviour {
 	void Update(){
 		raw.text = "Raw data: " + Raw.ToString();
 		signal.text = "Signal data: " + PoorSignal.ToString();
-		medi.text = "Medi data: " + Meditation.ToString();
-		alpha.text = "Alpha data: " + LowAlpha.ToString();
-		algoAlpha.text = "AlgoAlpha data: " + Algo_Alpha.ToString();
+		medi.text = "Connect state: " + ConnectState;
 	}
-
-	/*
-	IEnumerator CalcAverageAlpha() {
-		float t = 0;
-		float tempAlpha;
-
-		while (t < 5f) {
-			t += Time.deltaTime;
-			tempAlpha = (HighAlpha + LowAlpha) / 2f;
-			alphaData.Add (tempAlpha);
-			// Wait one frame, and repeat.
-			yield return null;
-		}
-
-		averageAlpha = alphaData.Average ();
-		StartCoroutine ("CalcAverageAlpha");
-	}*/
 
 	void Add2DeviceListArray(string element){
 		string mfgid = "";

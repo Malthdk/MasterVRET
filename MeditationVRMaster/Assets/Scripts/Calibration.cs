@@ -1,29 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
 
 public class Calibration : MonoBehaviour {
 
 	[HideInInspector]
-	public List<float> respCaliDataList, alhpaCaliDataList;
+	public List<float> respCaliDataList;
 	public bool calibrating, finishedCalibrating;
 
 	public BluetoothConnection btConnection;
 	public EEGListener eegListener;
 	public Intro introScript;
+	public Text debugText;
 
-	public float calibrationDuration, normRespData, alphaAvg;
+	public float calibrationDuration, normRespData;
 	public GameObject respiParticleSystem, eegManager;
 
 	void Awake() {
 		respCaliDataList = new List<float>();
-		alhpaCaliDataList = new List<float>();
 	}
 
 	void Update () {
-		if (finishedCalibrating && btConnection.respValue < 1000f && btConnection.respValue > 800f) {
+		if (finishedCalibrating && btConnection.respValue < 300f && btConnection.respValue > 100f) {
 			normRespData = NormaliseData (respCaliDataList ,btConnection.respValue);
+			debugText.text = "Resp data: " + normRespData.ToString ();
 		} 
 		if (introScript.startCalibration && !calibrating && !finishedCalibrating) {
 			StartCoroutine ("Calibrate");
@@ -45,14 +47,12 @@ public class Calibration : MonoBehaviour {
 		calibrating = true;
 		while (t < calibrationDuration) {
 			t += Time.deltaTime;
-			if (btConnection.respValue < 1000f && btConnection.respValue > 800f) {
+			if (btConnection.respValue < 300f && btConnection.respValue > 100f) {
 				respCaliDataList.Add (btConnection.respValue);
 			} 
-			alhpaCaliDataList.Add (eegListener.LowAlpha);
 			// Wait one frame, and repeat.
 			yield return null;
 		}
-		alphaAvg = alhpaCaliDataList.Average();
 		eegManager.SetActive (true);
 		calibrating = false;
 		finishedCalibrating = true;

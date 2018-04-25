@@ -41,16 +41,23 @@ public class ThinkGearController : MonoBehaviour {
 	private bool sendBlinkEnable = true;
 	
 	void Awake(){
-		UnityThinkGear.Init(true);
-		UnityThinkGear.StartStream ();
+		/*UnityThinkGear.Init(true);
+		UnityThinkGear.StartStream ();*/
 		InvokeRepeating("CheckUpdateEvent",0.0f,1.0f);
 	}
-	// Use this for initialization
+
 	void Start () {
 		sendRawEnable = UnityThinkGear.GetSendRawEnable();
 		sendEEGEnable = UnityThinkGear.GetSendEEGEnable();
 		sendESenseEnable = UnityThinkGear.GetSendESenseEnable();
 		sendBlinkEnable = UnityThinkGear.GetSendBlinkEnable();
+	}
+
+	void Update() {
+		/*if (Input.GetMouseButtonDown(0)) {
+			UnityThinkGear.Init(true);
+			UnityThinkGear.StartStream ();
+		}*/
 	}
 	
 	void CheckUpdateEvent(){
