@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
-public class EEGManager : MonoBehaviour {
+public class EEGMapper : MonoBehaviour {
 
 	public Calibration calibrationScript;
 	public EEGListener eegScript;
@@ -34,7 +34,8 @@ public class EEGManager : MonoBehaviour {
 	IEnumerator MeditationMapping() 
 	{
 		float fogAmountOld = fogAmount;
-		float fogAmountNew = 50 + (meditationAvg * 5.8f);				// Value needs to range from 50 to 650
+		//float fogAmountNew = 50 + (meditationAvg * 5.8f);				// Value needs to range from 50 to 650
+		float fogAmountNew = (meditationAvg * 4.5f);
 
 		float t = 0;
 		while (t < calculationDuration) {
@@ -52,7 +53,7 @@ public class EEGManager : MonoBehaviour {
 		float t = 0;
 		while (t < calculationDuration) {
 			t += Time.deltaTime;
-			meditationDataList.Add (eegScript.Meditation);
+			meditationDataList.Add (eegScript.Zone);
 			yield return null;
 		}
 		meditationAvg = meditationDataList.Average ();

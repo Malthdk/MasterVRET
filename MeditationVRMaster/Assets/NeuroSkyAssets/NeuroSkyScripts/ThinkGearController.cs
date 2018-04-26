@@ -41,8 +41,8 @@ public class ThinkGearController : MonoBehaviour {
 	private bool sendBlinkEnable = true;
 	
 	void Awake(){
-		/*UnityThinkGear.Init(true);
-		UnityThinkGear.StartStream ();*/
+		UnityThinkGear.Init(true);
+		UnityThinkGear.StartStream ();
 		InvokeRepeating("CheckUpdateEvent",0.0f,1.0f);
 	}
 

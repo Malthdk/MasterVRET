@@ -32,6 +32,7 @@ public class EEGListener : MonoBehaviour {
 	public float Algo_Alpha = 0.0f;
 	public float Algo_Beta = 0.0f;
 	public float Algo_Gamma = 0.0f;
+	public float Zone;
 
 	public string ConnectState;
 
@@ -78,6 +79,10 @@ public class EEGListener : MonoBehaviour {
 		deviceList = new ArrayList();
 		displayedStrArr = new ArrayList();
 		alphaData = new List<float>();
+	}
+
+	void CalculateZone(){
+		Zone = (Attention * 0.35f) + (Meditation * 0.65f);
 	}
 
 	void OnUpdateConnectState(string value)
@@ -169,6 +174,7 @@ public class EEGListener : MonoBehaviour {
 		raw.text = "Raw data: " + Raw.ToString();
 		signal.text = "Signal data: " + PoorSignal.ToString();
 		medi.text = "Connect state: " + ConnectState;
+		CalculateZone ();
 	}
 
 	void Add2DeviceListArray(string element){

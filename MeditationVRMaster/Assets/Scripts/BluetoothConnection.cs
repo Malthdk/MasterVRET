@@ -66,8 +66,10 @@ public class BluetoothConnection : MonoBehaviour
 			}
 		}
 
-		if (eegListener.PoorSignal < 80) {
+		if (eegListener.PoorSignal < 1) {
 			tgConnected = true;
+		} else {
+			tgConnected = false;
 		}
 	}
 

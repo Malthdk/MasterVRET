@@ -18,20 +18,20 @@
 		android:allowBackup="true"
         android:supportsRtl="true">
 
-        <activity android:name="com.neurosky.mindgame.UnityThinkGear">
+        -<activity android:name="com.neurosky.mindgame.UnityThinkGear">
         	<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
         </activity>
-        <activity android:name="com.unity3d.player.UnityPlayerActivity" android:label="@string/app_name">
+        <!--<activity android:name="com.unity3d.player.UnityPlayerActivity" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
-        </activity>
+        </activity>-->
     <!--Activity added by the BT library-->
   <activity android:name="com.techtweaking.bluetoothcontroller.ForwardingActivity" android:background="#00000000"></activity>
   </application>
