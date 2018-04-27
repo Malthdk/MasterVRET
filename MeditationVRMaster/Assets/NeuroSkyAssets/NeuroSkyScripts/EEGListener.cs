@@ -82,7 +82,7 @@ public class EEGListener : MonoBehaviour {
 	}
 
 	void CalculateZone(){
-		Zone = (Attention * 0.35f) + (Meditation * 0.65f);
+		Zone = (Attention * 0.45f) + (Meditation * 0.55f);
 	}
 
 	void OnUpdateConnectState(string value)
@@ -173,7 +173,6 @@ public class EEGListener : MonoBehaviour {
 	void Update(){
 		raw.text = "Raw data: " + Raw.ToString();
 		signal.text = "Signal data: " + PoorSignal.ToString();
-		medi.text = "Connect state: " + ConnectState;
 		CalculateZone ();
 	}
 

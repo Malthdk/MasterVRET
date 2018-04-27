@@ -14,7 +14,7 @@ public class Intro : MonoBehaviour
 	public float delay = 1f;
 
 	[HideInInspector]
-	public bool startCalibration;
+	public bool startCalibration, introEnded;
 
 	private bool btConnected, textChanging;
 	private int index;
@@ -30,7 +30,7 @@ public class Intro : MonoBehaviour
 
 	void Update() {
 		// If mouse button is down and we are not calibrating
-		if (Input.GetMouseButtonDown (0) && !startCalibration && !textChanging && btScript.tgConnected) {
+		if (Input.GetMouseButtonDown (0) && !startCalibration && !textChanging && btScript.tgConnected && btScript.respConnected) {
 			textChanging = true;
 			index++;
 			if (index < textObjects.Length) {
@@ -124,7 +124,6 @@ public class Intro : MonoBehaviour
 		StartCoroutine(FadeTo(calibrationPanelImage, 0f, 1f));
 		StartCoroutine(FadeTo(calibrationText, 0f, 1.5f));
 		StartCoroutine(FadeTo(calibrationImage, 0f, 1f));
-		StartCoroutine(FadeTo(title, 0f, 1.2f));
 		index++;
 		if (index < textObjects.Length) {
 			StartCoroutine ("ChangeText");
@@ -133,12 +132,13 @@ public class Intro : MonoBehaviour
 
 	// This courutine ends the into secuence by fading out UI elements and activating game elements
 	IEnumerator EndIntro() {
+		introEnded = true;
 		StartCoroutine(FadeTo(logo, 0f, 3f));
 		StartCoroutine(FadeTo(textObjects[2], 0f, 1.5f));
 		StartCoroutine(FadeTo(mainBackground, 0f, 2f));
 		yield return new WaitForSeconds (3f);
 		particleSystem.SetActive (true);
-		breathingCanvas.SetActive (true);
+		//breathingCanvas.SetActive (true);
 		gameObject.SetActive (false);
 	}
 
