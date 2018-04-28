@@ -46,25 +46,21 @@ public class Intro : MonoBehaviour
 		}
 
 		// Used to display bluetooth icon
-		if (!btScript.respConnected || !btScript.tgConnected) {
-			DisplayBluetooth ();
-		}
+		DisplayBluetooth ();
 	}
 
 	void DisplayBluetooth() {
-		if (btScript.respConnected && !btConnected) {
+		if (btScript.respConnected) {
 			btImageResp.color = Color.green;
-		} else if (!btScript.respConnected && !btConnected) {
+		} else {
 			btImageResp.color = Color.red;
 		}
-		if (btScript.tgConnected && !btConnected) {
+		if (btScript.tgConnected) {
 			btImageEEG.color = Color.green;
-		} else if (!btScript.tgConnected && !btConnected) {
+		} else if (btScript.tgConnecting) {
+			btImageEEG.color = Color.yellow;
+		} else {
 			btImageEEG.color = Color.red;
-		}
-		if (btScript.tgConnected && btScript.respConnected) {
-			StartCoroutine(FadeTo(btImageResp, 0f, 5f));
-			StartCoroutine(FadeTo(btImageEEG, 0f, 5.5f));
 		}
 	}
 
@@ -124,6 +120,7 @@ public class Intro : MonoBehaviour
 		StartCoroutine(FadeTo(calibrationPanelImage, 0f, 1f));
 		StartCoroutine(FadeTo(calibrationText, 0f, 1.5f));
 		StartCoroutine(FadeTo(calibrationImage, 0f, 1f));
+		StartCoroutine(FadeTo(title, 0f, 1f));
 		index++;
 		if (index < textObjects.Length) {
 			StartCoroutine ("ChangeText");
@@ -136,9 +133,11 @@ public class Intro : MonoBehaviour
 		StartCoroutine(FadeTo(logo, 0f, 3f));
 		StartCoroutine(FadeTo(textObjects[2], 0f, 1.5f));
 		StartCoroutine(FadeTo(mainBackground, 0f, 2f));
+		StartCoroutine(FadeTo(btImageEEG, 0f, 1.2f));
+		StartCoroutine(FadeTo(btImageResp, 0f, 1.4f));
 		yield return new WaitForSeconds (3f);
 		particleSystem.SetActive (true);
-		//breathingCanvas.SetActive (true);
+		//breathingCanvas.SetActive (true);	// Set true for breating exercise
 		gameObject.SetActive (false);
 	}
 

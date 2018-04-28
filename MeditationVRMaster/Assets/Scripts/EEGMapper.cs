@@ -9,6 +9,7 @@ public class EEGMapper : MonoBehaviour {
 
 	public Calibration calibrationScript;
 	public EEGListener eegScript;
+	public Material fogMat;
 
 	public Text debugText, debugText2;
 
@@ -19,9 +20,11 @@ public class EEGMapper : MonoBehaviour {
 	private List<float> meditationDataList;
 
 	private float meditationAvg, fogAmount;
+	private Color startingCol;
 
 	void Start () {
 		meditationDataList = new List<float>();
+		startingCol = fogMat.GetColor ("_TintColor");
 
 		// Starts calculating the average of the mediation value within 5s and map the values
 		StartCoroutine ("CalculateAverage");
@@ -34,8 +37,14 @@ public class EEGMapper : MonoBehaviour {
 	IEnumerator MeditationMapping() 
 	{
 		float fogAmountOld = fogAmount;
-		//float fogAmountNew = 50 + (meditationAvg * 5.8f);				// Value needs to range from 50 to 650
-		float fogAmountNew = (meditationAvg * 4.5f);
+		float fogAmountNew = meditationAvg * 4.5f;
+
+		Color col = new Color();			
+		col = startingCol;
+		float alphaOld = col.a;
+		Debug.Log (alphaOld);
+		float alphaNew = 255f - (meditationAvg * 2.55f);
+		col.a = alphaNew;
 
 		float t = 0;
 		while (t < calculationDuration) {
@@ -43,6 +52,8 @@ public class EEGMapper : MonoBehaviour {
 			// Turn the time into an interpolation factor between 0 and 1.
 			float blend = Mathf.Clamp01 (t / calculationDuration);
 			fogAmount = Mathf.Lerp (fogAmountOld, fogAmountNew, blend);
+			col.a = Mathf.Lerp (alphaOld, alphaNew, blend);
+			fogMat.SetColor ("_TintColor", col);
 			debugText.text = "Fog amount: " + fogAmount.ToString ();
 			yield return null;
 		}
