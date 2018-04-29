@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Intro : MonoBehaviour
 {
-	public GameObject particleSystem, breathingCanvas;
+	public GameObject particleSystem, breathingCanvas, fogParticleSystem;
 	public Calibration calibrationScript;
 	public BluetoothConnection btScript;
 	public Text calibrationText, title;
@@ -137,8 +137,9 @@ public class Intro : MonoBehaviour
 		StartCoroutine(FadeTo(btImageResp, 0f, 1.4f));
 		yield return new WaitForSeconds (3f);
 		particleSystem.SetActive (true);
+		fogParticleSystem.SetActive (true);
 		//breathingCanvas.SetActive (true);	// Set true for breating exercise
-		gameObject.SetActive (false);
+		Destroy(this.gameObject);
 	}
 
 }

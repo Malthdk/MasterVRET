@@ -576,7 +576,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 702664692
+  randomSeed: -935079116
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -8773,6 +8773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 16407367}
   breathingCanvas: {fileID: 1158746312}
+  fogParticleSystem: {fileID: 0}
   calibrationScript: {fileID: 33483672}
   btScript: {fileID: 1307460911}
   calibrationText: {fileID: 1028612059}
@@ -47340,7 +47341,7 @@ ParticleSystemRenderer:
   m_Pivot: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -47405,7 +47406,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -32574655
+  randomSeed: 1886227899
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -47558,7 +47559,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 19.9
-      minScalar: 5
+      minScalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -48308,7 +48309,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 0}
-        key1: {r: 0.9632353, g: 0.9577646, b: 0.913657, a: 1}
+        key1: {r: 0.9632353, g: 0.9577646, b: 0.913657, a: 0.70980394}
         key2: {r: 1, g: 1, b: 1, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -52529,7 +52530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2026393138
 RectTransform:
   m_ObjectHideFlags: 0
@@ -54365,6 +54366,7 @@ MonoBehaviour:
   debugText: {fileID: 80033855}
   debugText2: {fileID: 37472475}
   calculationDuration: 5
+  debugVal: 0
 --- !u!4 &2142315846
 Transform:
   m_ObjectHideFlags: 0

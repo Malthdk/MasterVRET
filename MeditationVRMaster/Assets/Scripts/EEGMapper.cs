@@ -22,6 +22,8 @@ public class EEGMapper : MonoBehaviour {
 	private float meditationAvg, fogAmount;
 	private Color startingCol;
 
+	public float debugVal;
+
 	void Start () {
 		meditationDataList = new List<float>();
 		startingCol = fogMat.GetColor ("_TintColor");
@@ -41,10 +43,8 @@ public class EEGMapper : MonoBehaviour {
 
 		Color col = new Color();			
 		col = startingCol;
-		float alphaOld = col.a;
-		Debug.Log (alphaOld);
-		float alphaNew = 255f - (meditationAvg * 2.55f);
-		col.a = alphaNew;
+		float alphaOld = fogMat.GetColor ("_TintColor").a;
+		float alphaNew = Mathf.Clamp01(.5f - (meditationAvg/160f));		// We start with 0.5 alpha (as this is default for the texture) and we divide with 160 since a meditation value of 80 should clear the fog!
 
 		float t = 0;
 		while (t < calculationDuration) {
@@ -64,7 +64,7 @@ public class EEGMapper : MonoBehaviour {
 		float t = 0;
 		while (t < calculationDuration) {
 			t += Time.deltaTime;
-			meditationDataList.Add (eegScript.Zone);
+			meditationDataList.Add (debugVal);
 			yield return null;
 		}
 		meditationAvg = meditationDataList.Average ();
