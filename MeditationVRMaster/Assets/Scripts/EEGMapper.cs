@@ -9,17 +9,17 @@ public class EEGMapper : MonoBehaviour {
 
 	public Calibration calibrationScript;
 	public EEGListener eegScript;
-	public Material fogMat;
+	public Material fogMat, skyBox;
 
 	public Text debugText, debugText2;
 
 	StreamWriter sw;
 
-	public float calculationDuration = 3f;
+	public float calculationDuration;
 
 	private List<float> meditationDataList;
 
-	private float meditationAvg, fogAmount;
+	private float meditationAvg, fogAmount, skyFog;
 	private Color startingCol;
 
 	public float debugVal;
@@ -38,22 +38,33 @@ public class EEGMapper : MonoBehaviour {
 
 	IEnumerator MeditationMapping() 
 	{
+		// For the unity global fog
 		float fogAmountOld = fogAmount;
 		float fogAmountNew = meditationAvg * 4.5f;
 
+		// For the fog particle system
 		Color col = new Color();			
 		col = startingCol;
 		float alphaOld = fogMat.GetColor ("_TintColor").a;
 		float alphaNew = Mathf.Clamp01(.5f - (meditationAvg/160f));		// We start with 0.5 alpha (as this is default for the texture) and we divide with 160 since a meditation value of 80 should clear the fog!
 
+		// For the skybox fog
+		float skyFogOld = skyBox.GetFloat("_FogFill");
+		float skyFogNew = Mathf.Clamp01(.8f - (meditationAvg / 120f));
+			
 		float t = 0;
 		while (t < calculationDuration) {
 			t += Time.deltaTime;
-			// Turn the time into an interpolation factor between 0 and 1.
 			float blend = Mathf.Clamp01 (t / calculationDuration);
+
 			fogAmount = Mathf.Lerp (fogAmountOld, fogAmountNew, blend);
+
+			skyFog = Mathf.Lerp (skyFogOld, skyFogNew, blend);
+			skyBox.SetFloat("_FogFill", skyFog);
+
 			col.a = Mathf.Lerp (alphaOld, alphaNew, blend);
 			fogMat.SetColor ("_TintColor", col);
+
 			debugText.text = "Fog amount: " + fogAmount.ToString ();
 			yield return null;
 		}
@@ -64,7 +75,7 @@ public class EEGMapper : MonoBehaviour {
 		float t = 0;
 		while (t < calculationDuration) {
 			t += Time.deltaTime;
-			meditationDataList.Add (debugVal);
+			meditationDataList.Add (eegScript.Meditation);
 			yield return null;
 		}
 		meditationAvg = meditationDataList.Average ();

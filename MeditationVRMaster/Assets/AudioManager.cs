@@ -20,8 +20,8 @@ public class AudioManager : MonoBehaviour {
 
 	void Update() {
 		if (introScript.introEnded) {
-			StartCoroutine (PlayAudio (musicAS, music, 0f, 1f, 2f, 0f));
-			StartCoroutine (PlayAudio (speakAS, speak, 0f, 1f, 1f, 3f));
+			StartCoroutine (PlayAudio (musicAS, music, 0f, .8f, 2f, 0f));
+			StartCoroutine (PlayAudio (speakAS, speak, 0f, 1.1f, 1f, 3f));
 			StartCoroutine (PlayAudio (ambienceAS, ambience, 1f, 0f, 3f, .5f));
 		}
 	}

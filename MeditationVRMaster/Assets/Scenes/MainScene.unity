@@ -15,11 +15,11 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 8
   m_Fog: 1
-  m_FogColor: {r: 1, g: 0.9858012, b: 0.9264706, a: 1}
+  m_FogColor: {r: 0.9264706, g: 0.9159468, b: 0.8719723, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.001
-  m_LinearFogStart: 0
-  m_LinearFogEnd: 450
+  m_LinearFogStart: 15
+  m_LinearFogEnd: 250
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.445
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3249568, g: 0.48905498, b: 0.6714277, a: 0.445}
+  m_IndirectSpecularColor: {r: 0.2743696, g: 0.461677, b: 0.6819287, a: 0.445}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -8773,7 +8773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 16407367}
   breathingCanvas: {fileID: 1158746312}
-  fogParticleSystem: {fileID: 0}
+  fogParticleSystem: {fileID: 1954713393}
   calibrationScript: {fileID: 33483672}
   btScript: {fileID: 1307460911}
   calibrationText: {fileID: 1028612059}
@@ -15522,7 +15522,7 @@ MonoBehaviour:
   speakAS: {fileID: 0}
   ambienceAS: {fileID: 0}
   music: {fileID: 8300000, guid: cc63b7eef3f434402a63409480dd308a, type: 3}
-  speak: {fileID: 8300000, guid: 117e0f45364404b6c9e1685f42dc11be, type: 3}
+  speak: {fileID: 8300000, guid: f918e5b212ef74be29728ce3023644c3, type: 3}
   ambience: {fileID: 8300000, guid: b5fc0d2cfb70e41b6a0361cd801f9be8, type: 3}
   introScript: {fileID: 232051810}
 --- !u!4 &546546864
@@ -17708,11 +17708,11 @@ GameObject:
   m_Component:
   - component: {fileID: 645501426}
   - component: {fileID: 645501425}
-  - component: {fileID: 645501424}
   - component: {fileID: 645501423}
   - component: {fileID: 645501422}
   - component: {fileID: 645501420}
   - component: {fileID: 645501421}
+  - component: {fileID: 645501424}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -17760,14 +17760,21 @@ Behaviour:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 645501419}
   m_Enabled: 1
---- !u!92 &645501424
-Behaviour:
+--- !u!114 &645501424
+MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 9299588, guid: fc40bd16021f7bb448e4edf960efcaf6,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 645501419}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: d8a4f2a1ccae44cbbb9abf032d38357c, type: 2}
+  m_Camera: {fileID: 645501425}
+  m_PreviousProfile: {fileID: 11400000, guid: d8a4f2a1ccae44cbbb9abf032d38357c, type: 2}
+  m_RenderingInSceneView: 0
 --- !u!20 &645501425
 Camera:
   m_ObjectHideFlags: 0
@@ -47291,7 +47298,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &1954713394
 ParticleSystemRenderer:
   serializedVersion: 4
@@ -47406,7 +47413,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1886227899
+  randomSeed: -1739390384
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -52530,7 +52537,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2026393138
 RectTransform:
   m_ObjectHideFlags: 0
@@ -54363,9 +54370,10 @@ MonoBehaviour:
   calibrationScript: {fileID: 33483672}
   eegScript: {fileID: 1593002205}
   fogMat: {fileID: 2100000, guid: 25aea1ac384d24180b6d0b286412ce10, type: 2}
+  skyBox: {fileID: 2100000, guid: 2bd8959f5fbd3644aa33af1a155fc147, type: 2}
   debugText: {fileID: 80033855}
   debugText2: {fileID: 37472475}
-  calculationDuration: 5
+  calculationDuration: 3
   debugVal: 0
 --- !u!4 &2142315846
 Transform:
