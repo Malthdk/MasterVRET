@@ -50,7 +50,7 @@ public class EEGMapper : MonoBehaviour {
 
 		// For the skybox fog
 		float skyFogOld = skyBox.GetFloat("_FogFill");
-		float skyFogNew = Mathf.Clamp01(.8f - (meditationAvg / 120f));
+		float skyFogNew = Mathf.Clamp01(1f - (meditationAvg / 80f));
 			
 		float t = 0;
 		while (t < calculationDuration) {

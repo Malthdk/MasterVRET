@@ -24,7 +24,7 @@ public class Calibration : MonoBehaviour {
 
 	void Update () {
 		if (finishedCalibrating && btConnection.respValue < 300f && btConnection.respValue > 50f) {
-			normRespData = NormaliseData (respCaliDataList ,btConnection.respValue);
+			normRespData = NormaliseData01 (respCaliDataList ,btConnection.respValue);
 			debugText.text = "RespNorm: " + normRespData.ToString () + " Resp:" + btConnection.respValue.ToString();
 		} 
 		if (introScript.startCalibration && !calibrating && !finishedCalibrating) {
@@ -38,6 +38,15 @@ public class Calibration : MonoBehaviour {
 		float maxValue = list.Max ();
 
 		float normData = 2f * ((data - minValue) / (maxValue - minValue)) - 1;
+		return normData;
+	}
+
+	// To range between 0 and 1
+	float NormaliseData01(List<float> list, float data) {
+		float minValue = list.Min ();
+		float maxValue = list.Max ();
+
+		float normData = (data - minValue) / (maxValue - minValue);
 		return normData;
 	}
 

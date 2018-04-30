@@ -6,6 +6,7 @@ using System.Linq;
 public class CircleBreath : MonoBehaviour {
 
 	public Calibration calibrationScript;
+	public float duration = .2f;
 	private float respValue;
 
 	private Vector3 startScale;
@@ -21,9 +22,9 @@ public class CircleBreath : MonoBehaviour {
 		float scaleNew = transform.localScale.x * respValue;
 		float scale;
 		float t = 0;
-		while (t < .5f) {
+		while (t < duration) {
 			t += Time.deltaTime;
-			float blend = Mathf.Clamp01 (t / .5f);
+			float blend = Mathf.Clamp01 (t / duration);
 
 			scale = Mathf.Lerp (scaleOld, scaleNew, blend);
 			transform.localScale = startScale + (new Vector3(scale,scale,scale));
@@ -34,7 +35,7 @@ public class CircleBreath : MonoBehaviour {
 	IEnumerator SmoothenValues() {
 		List<float> respValues = new List<float>();
 		float t = 0;
-		while (t < .5f) {
+		while (t < duration) {
 			t += Time.deltaTime;
 			respValues.Add (calibrationScript.normRespData);
 			yield return null;
