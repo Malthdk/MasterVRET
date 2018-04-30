@@ -8,32 +8,33 @@ using System.Linq;
 public class EEGMapper : MonoBehaviour {
 
 	public Calibration calibrationScript;
+	public Intro introScript;
 	public EEGListener eegScript;
 	public Material fogMat, skyBox;
-
 	public Text debugText, debugText2;
-
-	StreamWriter sw;
-
 	public float calculationDuration;
 
 	private List<float> meditationDataList;
-
 	private float meditationAvg, fogAmount, skyFog;
 	private Color startingCol;
-
-	public float debugVal;
+	private bool mapping;
 
 	void Start () {
 		meditationDataList = new List<float>();
-		startingCol = fogMat.GetColor ("_TintColor");
 
-		// Starts calculating the average of the mediation value within 5s and map the values
-		StartCoroutine ("CalculateAverage");
+		// Sets default values
+		startingCol = fogMat.GetColor ("_TintColor");
+		startingCol.a = 0.5f;
+		fogMat.SetColor ("TintColor", startingCol);
+		skyBox.SetFloat ("_FogFill", 0f);
+		RenderSettings.fogEndDistance = 450f;
 	}
 
 	void Update () {
-		RenderSettings.fogEndDistance = fogAmount;
+		if (introScript.introEnded && !mapping) {
+			mapping = true;
+			StartCoroutine ("CalculateAverage");
+		}
 	}
 
 	IEnumerator MeditationMapping() 
@@ -58,6 +59,7 @@ public class EEGMapper : MonoBehaviour {
 			float blend = Mathf.Clamp01 (t / calculationDuration);
 
 			fogAmount = Mathf.Lerp (fogAmountOld, fogAmountNew, blend);
+			RenderSettings.fogEndDistance = fogAmount;
 
 			skyFog = Mathf.Lerp (skyFogOld, skyFogNew, blend);
 			skyBox.SetFloat("_FogFill", skyFog);

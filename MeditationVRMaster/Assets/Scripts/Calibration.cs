@@ -62,7 +62,6 @@ public class Calibration : MonoBehaviour {
 			// Wait one frame, and repeat.
 			yield return null;
 		}
-		eegManager.SetActive (true);
 		calibrating = false;
 		finishedCalibrating = true;
 	}

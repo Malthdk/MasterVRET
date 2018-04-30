@@ -7,6 +7,7 @@ public class CircleBreath : MonoBehaviour {
 
 	public Calibration calibrationScript;
 	public float duration = .2f;
+	public float debugVal;
 	private float respValue;
 
 	private Vector3 startScale;
@@ -19,15 +20,14 @@ public class CircleBreath : MonoBehaviour {
 	IEnumerator SetScale() 
 	{
 		float scaleOld = transform.localScale.x;
-		float scaleNew = transform.localScale.x * respValue;
 		float scale;
 		float t = 0;
 		while (t < duration) {
 			t += Time.deltaTime;
 			float blend = Mathf.Clamp01 (t / duration);
 
-			scale = Mathf.Lerp (scaleOld, scaleNew, blend);
-			transform.localScale = startScale + (new Vector3(scale,scale,scale));
+			scale = Mathf.Lerp (scaleOld, respValue, blend);
+			transform.localScale = new Vector3(scale,scale,scale);
 			yield return null;
 		}
 	}
@@ -41,6 +41,8 @@ public class CircleBreath : MonoBehaviour {
 			yield return null;
 		}
 		respValue = respValues.Average ();
+		respValue += .5f;
+		respValue *= 12f;
 		respValues.Clear();
 		StartCoroutine ("SetScale");
 		StartCoroutine ("SmoothenValues");

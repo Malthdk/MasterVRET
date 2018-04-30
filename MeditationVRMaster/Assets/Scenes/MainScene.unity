@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.445
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5600907, g: 0.59798247, b: 0.62260133, a: 0.445}
+  m_IndirectSpecularColor: {r: 0.28017223, g: 0.46471268, b: 0.68053424, a: 0.445}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -330,7 +330,7 @@ Transform:
   m_LocalScale: {x: 10.790131, y: 10.79015, z: 10.79015}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &12891197
 Transform:
@@ -447,7 +447,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &16407369
 MonoBehaviour:
@@ -4547,7 +4547,7 @@ MonoBehaviour:
   eegListener: {fileID: 1593002205}
   introScript: {fileID: 232051810}
   debugText: {fileID: 37472475}
-  calibrationDuration: 25
+  calibrationDuration: 4
   normRespData: 0
   respiParticleSystem: {fileID: 16407367}
   eegManager: {fileID: 2142315844}
@@ -7626,7 +7626,7 @@ Transform:
   m_LocalScale: {x: 3.0662775, y: 3.066277, z: 3.0662796}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &184323939
 SphereCollider:
@@ -8589,7 +8589,7 @@ Transform:
   - {fileID: 2026393138}
   - {fileID: 1158746313}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: -8.64, y: -204.73, z: 0}
 --- !u!1001 &228926356
 Prefab:
@@ -8774,6 +8774,7 @@ MonoBehaviour:
   particleSystem: {fileID: 16407367}
   breathingCanvas: {fileID: 1158746312}
   fogParticleSystem: {fileID: 1954713393}
+  circle: {fileID: 1624184933}
   calibrationScript: {fileID: 33483672}
   btScript: {fileID: 1307460911}
   calibrationText: {fileID: 1028612059}
@@ -17817,8 +17818,7 @@ Transform:
   m_LocalRotation: {x: 0.016130367, y: -0.97402817, z: -0.073579445, w: -0.21353017}
   m_LocalPosition: {x: -87.38, y: 16.1, z: 49.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1624184937}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -8.64, y: -204.73, z: 0}
@@ -38247,7 +38247,7 @@ Transform:
   - {fileID: 942486232}
   - {fileID: 1593002206}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1624184933
 GameObject:
@@ -38267,7 +38267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1624184934
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -38329,12 +38329,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1624184933}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.85, y: -0.92, z: 23.46}
-  m_LocalScale: {x: 9.832077, y: 9.832063, z: 9.832063}
+  m_LocalRotation: {x: 0.016130367, y: -0.97402817, z: -0.073579445, w: -0.21353017}
+  m_LocalPosition: {x: -78.39128, y: 18.714731, z: 28.372215}
+  m_LocalScale: {x: 9.832088, y: 9.832063, z: 9.832072}
   m_Children: []
-  m_Father: {fileID: 645501426}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1624184938
 MonoBehaviour:
@@ -38348,6 +38348,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   calibrationScript: {fileID: 33483672}
+  duration: 0.2
+  debugVal: 1
 --- !u!4 &1626979836 stripped
 Transform:
   m_PrefabParentObject: {fileID: 436128, guid: 007ca2ed3b11eff4b8ac5b742e238fa5, type: 2}
@@ -50721,7 +50723,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1954832919
 GameObject:
@@ -52533,7 +52535,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2026393138
 RectTransform:
   m_ObjectHideFlags: 0
@@ -54351,7 +54353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2142315845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54364,13 +54366,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   calibrationScript: {fileID: 33483672}
+  introScript: {fileID: 232051810}
   eegScript: {fileID: 1593002205}
   fogMat: {fileID: 2100000, guid: 25aea1ac384d24180b6d0b286412ce10, type: 2}
   skyBox: {fileID: 2100000, guid: 2bd8959f5fbd3644aa33af1a155fc147, type: 2}
   debugText: {fileID: 80033855}
   debugText2: {fileID: 37472475}
   calculationDuration: 3
-  debugVal: 0
 --- !u!4 &2142315846
 Transform:
   m_ObjectHideFlags: 0

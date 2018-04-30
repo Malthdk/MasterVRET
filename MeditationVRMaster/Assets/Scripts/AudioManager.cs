@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour {
 	public AudioClip music, speak, ambience;
 
 	public Intro introScript;
+	private bool playingMusic;
 
 	void Start () {
 		musicAS = transform.GetChild (0).GetComponent<AudioSource> ();
@@ -19,9 +20,10 @@ public class AudioManager : MonoBehaviour {
 	}
 
 	void Update() {
-		if (introScript.introEnded) {
-			StartCoroutine (PlayAudio (musicAS, music, 0f, .8f, 2f, 0f));
-			StartCoroutine (PlayAudio (speakAS, speak, 0f, 1.1f, 1f, 3f));
+		if (introScript.introEnded && !playingMusic) {
+			playingMusic = true;
+			StartCoroutine (PlayAudio (musicAS, music, 0f, .75f, 2f, 0f));
+			StartCoroutine (PlayAudio (speakAS, speak, 0f, 1f, 1f, 3f));
 			StartCoroutine (PlayAudio (ambienceAS, ambience, 1f, 0f, 3f, .5f));
 		}
 	}
