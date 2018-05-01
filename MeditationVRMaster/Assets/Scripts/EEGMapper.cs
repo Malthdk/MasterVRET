@@ -24,7 +24,7 @@ public class EEGMapper : MonoBehaviour {
 
 		// Sets default values
 		startingCol = fogMat.GetColor ("_TintColor");
-		startingCol.a = 0.5f;
+		startingCol.a = 0.2f;
 		fogMat.SetColor ("TintColor", startingCol);
 		skyBox.SetFloat ("_FogFill", 0f);
 		RenderSettings.fogEndDistance = 450f;
@@ -52,6 +52,13 @@ public class EEGMapper : MonoBehaviour {
 		// For the skybox fog
 		float skyFogOld = skyBox.GetFloat("_FogFill");
 		float skyFogNew = Mathf.Clamp01(1f - (meditationAvg / 80f));
+
+		if (meditationAvg == 0) {
+			skyBox.SetFloat("_FogFill", .5f);
+			fogMat.SetColor ("_TintColor", startingCol);
+			RenderSettings.fogEndDistance = 250f;
+			yield break;
+		}
 			
 		float t = 0;
 		while (t < calculationDuration) {
