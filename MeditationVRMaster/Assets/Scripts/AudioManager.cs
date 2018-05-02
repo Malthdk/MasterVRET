@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour {
 		if (introScript.introEnded && !playingMusic) {
 			playingMusic = true;
 			StartCoroutine (PlayAudio (musicAS, music, 0f, .75f, 2f, 0f));
-			StartCoroutine (PlayAudio (speakAS, speak, 0f, 1f, 1f, 3f));
+			StartCoroutine (PlayAudio (speakAS, speak, 0f, 1f, 1f, 5f));
 			StartCoroutine (PlayAudio (ambienceAS, ambience, 1f, 0f, 3f, .5f));
 		}
 	}

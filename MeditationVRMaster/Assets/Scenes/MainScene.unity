@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 8
   m_Fog: 1
-  m_FogColor: {r: 0.9264706, g: 0.9159468, b: 0.8719723, a: 1}
+  m_FogColor: {r: 0.8235294, g: 0.810667, b: 0.7569204, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.001
   m_LinearFogStart: 0
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.445
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.26022676, g: 0.4554435, b: 0.6931194, a: 0.445}
+  m_IndirectSpecularColor: {r: 0.27086967, g: 0.4479972, b: 0.67178494, a: 0.445}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -55648,7 +55648,7 @@ GameObject:
   - component: {fileID: 2142315846}
   - component: {fileID: 2142315845}
   m_Layer: 0
-  m_Name: EEGManager
+  m_Name: EEGMapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55672,7 +55672,7 @@ MonoBehaviour:
   skyBox: {fileID: 2100000, guid: 2bd8959f5fbd3644aa33af1a155fc147, type: 2}
   debugText: {fileID: 80033855}
   debugText2: {fileID: 37472475}
-  calculationDuration: 3
+  calculationDuration: 2.1
 --- !u!4 &2142315846
 Transform:
   m_ObjectHideFlags: 0

@@ -83,8 +83,8 @@ Material:
     - _EnableRotation: 1
     - _Exposure: 1
     - _FogFill: 0
-    - _FogHeight: 0.17
-    - _FogSmoothness: 0.16
+    - _FogHeight: 0.32
+    - _FogSmoothness: 0.17
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
