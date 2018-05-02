@@ -15,9 +15,9 @@ public class EEGMapper : MonoBehaviour {
 	public float calculationDuration;
 
 	private List<float> meditationDataList;
-	private float meditationAvg, fogAmount, skyFog;
+	private float meditationAvg, smoothMedValue, prevSmoothMedValue, fogAmount, skyFog;
 	private Color startingCol;
-	private bool mapping;
+	private bool mapping, initialisedSmoothing;
 
 	void Start () {
 		meditationDataList = new List<float>();
@@ -41,13 +41,13 @@ public class EEGMapper : MonoBehaviour {
 	{
 		// For the unity global fog
 		float fogAmountOld = fogAmount;
-		float fogAmountNew = meditationAvg * 4.5f;
+		float fogAmountNew = 50 + meditationAvg * 5f;
 
 		// For the fog particle system
 		Color col = new Color();			
 		col = startingCol;
 		float alphaOld = fogMat.GetColor ("_TintColor").a;
-		float alphaNew = Mathf.Clamp01(.5f - (meditationAvg/160f));		// We start with 0.5 alpha (as this is default for the texture) and we divide with 160 since a meditation value of 80 should clear the fog!
+		float alphaNew = Mathf.Clamp01(.5f - (meditationAvg/140f));		// We start with 0.5 alpha (as this is default for the texture) and we divide with 140 since a meditation value of 70 should clear the fog!
 
 		// For the skybox fog
 		float skyFogOld = skyBox.GetFloat("_FogFill");
@@ -90,8 +90,18 @@ public class EEGMapper : MonoBehaviour {
 		meditationAvg = meditationDataList.Average ();
 		debugText.text = "Medi avg: " + meditationAvg.ToString ();
 		meditationDataList.Clear ();
+		if (!initialisedSmoothing) {
+			prevSmoothMedValue = meditationAvg;
+			initialisedSmoothing = true;
+		}
+		smoothMedValue = ExponentialSmoothing (meditationAvg, prevSmoothMedValue, .5);
 		StartCoroutine ("MeditationMapping");
 		StartCoroutine ("CalculateAverage");
+	}
+
+	float ExponentialSmoothing(float value, float prevValue, float a) {
+		float s = a * value + ((1f - a) * prevValue);						// .3 * 18 + .7 * 10 = 6 + 7 = 13
+		return s;
 	}
 }
 
