@@ -38278,6 +38278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eeg: {fileID: 0}
+  introScript: {fileID: 232051810}
 --- !u!1001 &1593687150
 Prefab:
   m_ObjectHideFlags: 0
