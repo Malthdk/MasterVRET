@@ -13,7 +13,7 @@ public class BluetoothConnection : MonoBehaviour
 	public TextMesh statusText;
 	public float respValue;
 
-	public bool respConnected, tgConnected, tgConnecting;
+	public bool respConnected, tgConnected, tgConnecting, respConnecting;
 
 	void Awake ()
 	{
@@ -84,9 +84,8 @@ public class BluetoothConnection : MonoBehaviour
 		if (statusText != null) {
 			statusText.text = "Status : Trying To Connect";
 		}
-
 		respConnected = false;
-
+		respConnecting = true;
 		/* The Property device.MacAdress doesn't require pairing. 
 		 * Also Mac Adress in this library is Case sensitive,  all chars must be capital letters
 		 */
@@ -157,6 +156,7 @@ public class BluetoothConnection : MonoBehaviour
 	{
 		if (device.IsReading) {
 			respConnected = true;
+			respConnecting = false;
 			byte [] msg = device.read ();
 			if (msg != null) {
 				string content = System.Text.ASCIIEncoding.ASCII.GetString (msg);

@@ -23,7 +23,7 @@ public class Calibration : MonoBehaviour {
 	}
 
 	void Update () {
-		if (finishedCalibrating && btConnection.respValue < 300f && btConnection.respValue > 50f) {
+		if (finishedCalibrating && btConnection.respValue < 250f && btConnection.respValue > 100f) {
 			normRespData = NormaliseData01 (respCaliDataList ,btConnection.respValue);
 			debugText.text = "RespNorm: " + normRespData.ToString () + " Resp:" + btConnection.respValue.ToString();
 		} 
@@ -56,7 +56,7 @@ public class Calibration : MonoBehaviour {
 		calibrating = true;
 		while (t < calibrationDuration) {
 			t += Time.deltaTime;
-			if (btConnection.respValue < 300f && btConnection.respValue > 50f) {
+			if (btConnection.respValue < 250f && btConnection.respValue > 100f) {
 				respCaliDataList.Add (btConnection.respValue);
 			} 
 			// Wait one frame, and repeat.

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.445
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.64527965, g: 0.63761437, b: 0.6062522, a: 0.445}
+  m_IndirectSpecularColor: {r: 0.26022676, g: 0.4554435, b: 0.6931194, a: 0.445}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -4646,7 +4646,7 @@ MonoBehaviour:
   eegListener: {fileID: 1593002205}
   introScript: {fileID: 232051810}
   debugText: {fileID: 37472475}
-  calibrationDuration: 4
+  calibrationDuration: 15
   normRespData: 0
   respiParticleSystem: {fileID: 16407367}
   eegManager: {fileID: 2142315844}
@@ -34844,6 +34844,7 @@ MonoBehaviour:
   respConnected: 0
   tgConnected: 0
   tgConnecting: 0
+  respConnecting: 0
 --- !u!4 &1307460912
 Transform:
   m_ObjectHideFlags: 0
@@ -42487,8 +42488,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   calibrationScript: {fileID: 33483672}
-  duration: 0.2
-  debugVal: 1
+  duration: 0.4
+  debugVal: 0.21
 --- !u!4 &1626979836 stripped
 Transform:
   m_PrefabParentObject: {fileID: 436128, guid: 007ca2ed3b11eff4b8ac5b742e238fa5, type: 2}

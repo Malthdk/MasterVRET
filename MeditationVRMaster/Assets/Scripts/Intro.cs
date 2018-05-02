@@ -30,7 +30,7 @@ public class Intro : MonoBehaviour
 
 	void Update() {
 		// If mouse button is down and we are not calibrating
-		if (Input.GetMouseButtonDown (0) && !startCalibration && !textChanging && btScript.tgConnected && btScript.respConnected) {
+		if (Input.GetMouseButtonDown (0) && !startCalibration && !textChanging /*&& btScript.tgConnected && btScript.respConnected*/) {
 			textChanging = true;
 			index++;
 			if (index < textObjects.Length) {
@@ -52,6 +52,8 @@ public class Intro : MonoBehaviour
 	void DisplayBluetooth() {
 		if (btScript.respConnected) {
 			btImageResp.color = Color.green;
+		} else if (btScript.respConnecting) {
+			btImageEEG.color = Color.yellow;
 		} else {
 			btImageResp.color = Color.red;
 		}
