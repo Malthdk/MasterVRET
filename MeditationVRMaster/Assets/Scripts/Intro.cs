@@ -131,8 +131,8 @@ public class Intro : MonoBehaviour
 		StartCoroutine(FadeTo(btImageEEG, 0f, 1.2f));
 		StartCoroutine(FadeTo(btImageResp, 0f, 1.4f));
 		yield return new WaitForSeconds (3f);
-		fogParticleSystem.SetActive (true);
-		circle.SetActive (true);
+//		fogParticleSystem.SetActive (true);
+//		circle.SetActive (true);
 		//particleSystem.SetActive (true);
 		//breathingCanvas.SetActive (true);	// Set true for breating exercise
 		Destroy(this.gameObject);
