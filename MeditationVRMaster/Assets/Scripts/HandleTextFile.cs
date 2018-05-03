@@ -14,8 +14,8 @@ public class HandleTextFile : MonoBehaviour
 
 	void Start() {
 		eeg = gameObject.GetComponent<EEGListener> ();
-		startTime = DateTime.UtcNow.ToString ("HH:mm_dd_MMMM_yyyy");
-		eegWriter = new StreamWriter(Application.persistentDataPath + "/eegData_" + startTime + ".txt");
+		startTime = DateTime.UtcNow.ToString ("HH:mm_MMMM_dd_yyyy");
+		eegWriter = new StreamWriter(Application.persistentDataPath + "/VR_" + startTime + ".txt");
 		eegWriter.WriteLine("Time, SignalLevel, Attention, Meditation, Zone, Delta, Theta, LowAlpha, HighAlpha, LowBeta, HighBeta, LowGamma, HighGamma, Raw");
 		StartCoroutine("WriteData");
 	}
