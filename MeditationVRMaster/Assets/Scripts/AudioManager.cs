@@ -9,7 +9,8 @@ public class AudioManager : MonoBehaviour {
 	public AudioClip music, speak, ambience;
 
 	public Intro introScript;
-	private bool playingMusic;
+	public bool audioEnded;
+	private bool playingMusic, endingMusic;
 
 	void Start () {
 		musicAS = transform.GetChild (0).GetComponent<AudioSource> ();
@@ -23,8 +24,28 @@ public class AudioManager : MonoBehaviour {
 		if (introScript.introEnded && !playingMusic) {
 			playingMusic = true;
 			StartCoroutine (PlayAudio (musicAS, music, 0f, .75f, 2f, 0f));
-			StartCoroutine (PlayAudio (speakAS, speak, 0f, 1f, 1f, 3f));
+			StartCoroutine (PlayAudio (speakAS, speak, 0f, 1f, 1f, 5f));
 			StartCoroutine (PlayAudio (ambienceAS, ambience, 1f, 0f, 3f, .5f));
+		}
+
+		if (playingMusic && speakAS.isPlaying && !endingMusic) {
+			endingMusic = true;
+			StartCoroutine ("EndAudio");
+		}
+	}
+
+	// Ending audio after speak length + 5 seconds
+	IEnumerator EndAudio () {
+		yield return new WaitForSeconds (speakAS.clip.length + 8f);
+		audioEnded = true;
+
+		// Fades out the music volume after speak has ended
+		float t = 0;
+		while (t < 4f) {
+			t += Time.deltaTime;
+			float blend = Mathf.Clamp01(t / 4f);
+			musicAS.volume = Mathf.Lerp(.75f, 0f, blend);
+			yield return null;
 		}
 	}
 
