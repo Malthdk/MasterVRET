@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour {
 	public AudioSource musicAS, speakAS, ambienceAS;
 	public AudioClip music, speak, ambience;
 
-	public Intro introScript;
+	public Calibration caliScript;
 	public bool audioEnded;
 	private bool playingMusic, endingMusic;
 
@@ -21,7 +21,7 @@ public class AudioManager : MonoBehaviour {
 	}
 
 	void Update() {
-		if (introScript.introEnded && !playingMusic) {
+		if (caliScript.finishedCalibrating && !playingMusic) {
 			playingMusic = true;
 			StartCoroutine (PlayAudio (musicAS, music, 0f, .75f, 2f, 0f));
 			StartCoroutine (PlayAudio (speakAS, speak, 0f, 1f, 1f, 5f));

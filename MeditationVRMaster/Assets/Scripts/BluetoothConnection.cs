@@ -12,10 +12,6 @@ public class BluetoothConnection : MonoBehaviour
 	public bool tgConnected, tgConnecting;
 
 	void Update() {
-		if (Input.GetMouseButtonDown (0) && !tgConnected) {
-			UnityThinkGear.Init (true);
-			UnityThinkGear.StartStream ();
-		}
 		if (eegListener.Raw != 0 && eegListener.PoorSignal != 0) {
 			tgConnected = false;
 			tgConnecting = true;
@@ -25,6 +21,13 @@ public class BluetoothConnection : MonoBehaviour
 		} else {
 			tgConnecting = false;
 			tgConnected = false;
+		}
+	}
+
+	public void Connect() {
+		if (!tgConnected) {
+			UnityThinkGear.Init (true);
+			UnityThinkGear.StartStream ();
 		}
 	}
 }

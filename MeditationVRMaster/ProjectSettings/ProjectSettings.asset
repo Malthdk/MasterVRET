@@ -7,12 +7,12 @@ PlayerSettings:
   productGUID: 5a86b210c1fdd0a47944fb1e9e3bc5bd
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
-  defaultScreenOrientation: 3
+  defaultScreenOrientation: 0
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Unity
-  productName: ZenVRBiofeedback
+  productName: ZenVRControl
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -158,7 +158,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.unity3d.ZenVRBiofeedback
+    Android: com.unity3d.ZenVRControl
     Standalone: unity.Unity.VRSamples
     Tizen: com.unity3d.vrstandardassets
     iOS: com.unity3d.vrstandardassets
@@ -286,7 +286,7 @@ PlayerSettings:
     m_Devices:
     - Oculus
   - m_BuildTarget: Android
-    m_Enabled: 1
+    m_Enabled: 0
     m_Devices:
     - Oculus
   m_BuildTargetEnableVuforiaSettings: []

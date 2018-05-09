@@ -6,7 +6,7 @@ using System;
 public class HandleTextFile : MonoBehaviour
 {
 	public EEGListener eeg;
-	public Intro introScript;
+	public Calibration cali;
 	private string startTime;
 	private TextWriter eegWriter;
 	private int seconds;
@@ -15,13 +15,13 @@ public class HandleTextFile : MonoBehaviour
 	void Start() {
 		eeg = gameObject.GetComponent<EEGListener> ();
 		startTime = DateTime.UtcNow.ToString ("HH:mm_MMMM_dd_yyyy");
-		eegWriter = new StreamWriter(Application.persistentDataPath + "/BIO_" + startTime + ".txt");
+		eegWriter = new StreamWriter(Application.persistentDataPath + "/CONTROL_" + startTime + ".txt");
 		eegWriter.WriteLine("Time, SignalLevel, Attention, Meditation, Zone, Delta, Theta, LowAlpha, HighAlpha, LowBeta, HighBeta, LowGamma, HighGamma, Raw");
 		StartCoroutine("WriteData");
 	}
 
 	void Update() {
-		if (introScript.startCalibration && !startedWriting) {
+		if (cali.calibrating && !startedWriting) {
 			startedWriting = true;
 			StartCoroutine ("WriteData");
 		}

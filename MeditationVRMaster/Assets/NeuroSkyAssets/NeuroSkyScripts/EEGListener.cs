@@ -171,8 +171,8 @@ public class EEGListener : MonoBehaviour {
 	}
 
 	void Update(){
-		if (raw != null)
-			raw.text = "Raw data: " + Raw.ToString();
+		if (medi != null)
+			raw.text = "Medi: " + Meditation.ToString();
 		if (signal != null)
 			signal.text = "Signal: " + PoorSignal.ToString();
 		CalculateZone ();
