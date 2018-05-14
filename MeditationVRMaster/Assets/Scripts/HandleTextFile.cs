@@ -18,7 +18,6 @@ public class HandleTextFile : MonoBehaviour
 		startTime = DateTime.UtcNow.ToString ("HH:mm_MMMM_dd_yyyy");
 		eegWriter = new StreamWriter(Application.persistentDataPath + "/BIO_" + startTime + ".txt");
 		eegWriter.WriteLine("Time, SignalLevel, Attention, Meditation, Zone, Delta, Theta, LowAlpha, HighAlpha, LowBeta, HighBeta, LowGamma, HighGamma, Raw");
-		StartCoroutine("WriteData");
 	}
 
 	void Update() {
