@@ -1027,7 +1027,7 @@ MonoBehaviour:
   eegListener: {fileID: 1593002205}
   introScript: {fileID: 232051810}
   debugText: {fileID: 37472475}
-  calibrationDuration: 25
+  calibrationDuration: 90
   normRespData: 0
   respiParticleSystem: {fileID: 0}
   eegManager: {fileID: 0}
@@ -48281,7 +48281,7 @@ MonoBehaviour:
     the system.
 
 
-    Take <b>3 deep breaths</b> before we continue.'
+    Please wait...'
 --- !u!222 &1943052715
 CanvasRenderer:
   m_ObjectHideFlags: 0
