@@ -1026,7 +1026,7 @@ MonoBehaviour:
   eegListener: {fileID: 1593002205}
   interScript: {fileID: 232051806}
   calibrationImage: {fileID: 2094764452}
-  calibrationDuration: 15
+  calibrationDuration: 90
   normRespData: 0
 --- !u!4 &33483673
 Transform:
@@ -15765,13 +15765,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8902ef04f323e444b98d2e4fd80a56ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DoubleClickTime: 0.3
-  m_SwipeWidth: 0.3
-  m_MouseDownPosition: {x: 0, y: 0}
-  m_MouseUpPosition: {x: 0, y: 0}
-  m_LastMouseUpTime: 0
-  m_LastHorizontalValue: 0
-  m_LastVerticalValue: 0
 --- !u!114 &645501421
 MonoBehaviour:
   m_ObjectHideFlags: 0
