@@ -5,9 +5,7 @@ using UnityEngine.UI;
 
 public class Intro : MonoBehaviour
 {
-	public GameObject particleSystem, breathingCanvas, fogParticleSystem, circle;
-	public Calibration calibrationScript;
-	public BluetoothConnection btScript;
+	public GameObject particleSystem, fogParticleSystem;
 	public Text calibrationText, title;
 	public Text[] textObjects;
 	public Image calibrationPanelImage, calibrationImage, logo, mainBackground, btImageResp, btImageEEG;
@@ -35,27 +33,11 @@ public class Intro : MonoBehaviour
 			index++;
 			if (index < textObjects.Length) {
 				StartCoroutine ("ChangeText");
-				if (index == 1) {
-					StartCoroutine ("StartCalibration");
-				}
 			}
 		}
 
 		if (Input.GetMouseButtonDown (0) && index == 2){	
 			StartCoroutine ("EndIntro");
-		}
-
-		// Used to display bluetooth icon
-		DisplayBluetooth ();
-	}
-
-	void DisplayBluetooth() {
-		if (btScript.tgConnected) {
-			btImageEEG.color = Color.green;
-		} else if (btScript.tgConnecting) {
-			btImageEEG.color = Color.yellow;
-		} else {
-			btImageEEG.color = Color.red;
 		}
 	}
 
@@ -93,33 +75,6 @@ public class Intro : MonoBehaviour
 		StartCoroutine(FadeTo(textObjects [index - 1], 0f, 1f));
 		yield return new WaitForSeconds (delay);
 		StartCoroutine(FadeTo(textObjects [index], 1f, 1f));
-	}
-
-	// This courutine controls the calibration UI in the intro secuence
-	IEnumerator StartCalibration() {
-		yield return new WaitForSeconds (delay+3.5f);
-		textChanging = false;
-		startCalibration = true;
-		StartCoroutine(FadeTo(calibrationPanelImage, 1f, 1f));
-		StartCoroutine(FadeTo(calibrationText, 1f, 1f));
-		float t = 0;
-		while (t < calibrationScript.calibrationDuration) {
-			// Step the fade forward one frame.
-			t += Time.deltaTime;
-			// Turn the time into an interpolation factor between 0 and 1.
-			float timeLeft = t / calibrationScript.calibrationDuration;
-			calibrationImage.fillAmount = timeLeft;
-			// Wait one frame, and repeat.
-			yield return null;
-		}
-		StartCoroutine(FadeTo(calibrationPanelImage, 0f, 1f));
-		StartCoroutine(FadeTo(calibrationText, 0f, 1.5f));
-		StartCoroutine(FadeTo(calibrationImage, 0f, 1f));
-		StartCoroutine(FadeTo(title, 0f, 1f));
-		index++;
-		if (index < textObjects.Length) {
-			StartCoroutine ("ChangeText");
-		}
 	}
 
 	// This courutine ends the into secuence by fading out UI elements and activating game elements
