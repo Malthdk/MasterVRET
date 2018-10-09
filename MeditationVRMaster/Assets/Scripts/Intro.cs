@@ -30,7 +30,7 @@ public class Intro : MonoBehaviour
 
 	void Update() {
 		// If mouse button is down and we are not calibrating
-		if (Input.GetMouseButtonDown (0) && !startCalibration && !textChanging && btScript.tgConnected) {
+		if (Input.GetMouseButtonDown (0) && !startCalibration) {
 			textChanging = true;
 			index++;
 			if (index < textObjects.Length) {
