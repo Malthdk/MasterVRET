@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Terrain_08
-  m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: StaticTrees
+  m_Shader: {fileID: 4800000, guid: 50245d7a65ead4d46b82388e33131f0e, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
@@ -39,7 +39,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 3d9a88f1f90dac84084dcf6310aac8e6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -59,12 +59,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AO: 0
+    - _BaseLight: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.01
+    - _Glossiness: 0.05
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
@@ -72,10 +74,25 @@ Material:
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _SquashAmount: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
+    - _b_influence: 1
+    - _branches_disp: 0
+    - _leaves_wiggle_disp: 0.07
+    - _leaves_wiggle_speed: 0.01
+    - _r_influence: 1
+    - _tree_sway_disp: 0
+    - _tree_sway_speed: 0
+    - _tree_sway_stutter: 0
+    - _tree_sway_stutter_influence: 0
+    - _wind_size: 5
     m_Colors:
-    - _Color: {r: 0.8897059, g: 0.8897059, b: 0.8897059, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _Tint: {r: 1, g: 1, b: 1, a: 1}
+    - _TreeInstanceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TreeInstanceScale: {r: 1, g: 1, b: 1, a: 1}
+    - _wind_dir: {r: 0, g: 0, b: 0, a: 0}

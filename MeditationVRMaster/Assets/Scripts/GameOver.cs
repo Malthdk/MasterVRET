@@ -6,22 +6,19 @@ using UnityEngine.UI;
 public class GameOver : MonoBehaviour {
 
 	public AudioManager audioScript;
-	public Image panel;
-	public Text txt, title;
+	public Material fadeOverlay;
 
 	private bool gameover;
 
 	void Update () {
 		if (audioScript.audioEnded && !gameover) {
 			gameover = true;
-			StartCoroutine(FadeTo(panel, 1f, 1f));
-			StartCoroutine(FadeTo(txt, 1f, 2f));
-			StartCoroutine(FadeTo(title, 1f, 2.2f));
+			StartCoroutine(FadeTo(fadeOverlay, 1f, 4f));
 		}
 	}
 
 	// Courutine that makes us able to fade in and out graphical objects (by changing their alpha value)
-	IEnumerator FadeTo(Graphic gfx, float targetOpacity, float duration)
+	IEnumerator FadeTo(Material gfx, float targetOpacity, float duration)
 	{
 		Color color;
 
@@ -47,5 +44,7 @@ public class GameOver : MonoBehaviour {
 			// Wait one frame, and repeat.
 			yield return null;
 		}
+
+		Application.Quit();
 	}
 }

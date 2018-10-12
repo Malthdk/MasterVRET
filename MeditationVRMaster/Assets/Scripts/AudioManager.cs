@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour {
 
 	// Ending audio after speak length + 5 seconds
 	IEnumerator EndAudio () {
-		yield return new WaitForSeconds (speakAS.clip.length + 8f);
+		yield return new WaitForSeconds (speakAS.clip.length + 20f);
 		audioEnded = true;
 
 		// Fades out the music volume after speak has ended
