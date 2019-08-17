@@ -4,8 +4,9 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Trees
   m_Shader: {fileID: 4800000, guid: 50245d7a65ead4d46b82388e33131f0e, type: 3}
   m_ShaderKeywords: _EMISSION
@@ -84,7 +85,7 @@ Material:
     - _leaves_wiggle_speed: 0.01
     - _r_influence: 1
     - _tree_sway_disp: 0.23
-    - _tree_sway_speed: 0.73
+    - _tree_sway_speed: 0.5
     - _tree_sway_stutter: 1.5
     - _tree_sway_stutter_influence: 0.2
     - _wind_size: 10.7
