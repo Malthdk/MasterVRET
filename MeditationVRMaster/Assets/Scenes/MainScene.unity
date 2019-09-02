@@ -13738,9 +13738,9 @@ MonoBehaviour:
   musicAS: {fileID: 0}
   speakAS: {fileID: 0}
   ambienceAS: {fileID: 0}
-  music: {fileID: 8300000, guid: cc63b7eef3f434402a63409480dd308a, type: 3}
+  music: {fileID: 8300000, guid: 102e8e0a1b0d870438c862aa6cd98a97, type: 3}
   speak: {fileID: 8300000, guid: 4e66cfa530666435f88db0fa33588c64, type: 3}
-  ambience: {fileID: 8300000, guid: b5fc0d2cfb70e41b6a0361cd801f9be8, type: 3}
+  ambience: {fileID: 8300000, guid: 5182f5138072d9d42b7d17db8201bf99, type: 3}
   introScript: {fileID: 232051810}
   audioEnded: 0
 --- !u!4 &546546864
@@ -17281,7 +17281,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -3.1, y: -7.2}
-  m_SizeDelta: {x: 28.37, y: 28.37}
+  m_SizeDelta: {x: 44.51, y: 44.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &692005868
 MonoBehaviour:
@@ -17303,7 +17303,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 00f53a6885dad4dd69eab2fe368d70ce, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9dc706a437af63c49a2caf343db06872, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
